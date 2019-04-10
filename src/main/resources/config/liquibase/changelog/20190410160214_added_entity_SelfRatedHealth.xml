@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity SelfRatedHealth.
+    -->
+    <changeSet id="20190410160214-1" author="jhipster">
+        <createTable tableName="self_rated_health">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="one_condition_more_serious" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="time_spent_managing" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="feel_overwhelmed" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="causes_are_linked" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="difficult_all_medications" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="limited_activities" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="different_medications_problems" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="mixing_medications" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="less_effective_treatments" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="one_cause_another" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="one_dominates" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="conditions_interact" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="difficult_best_treatment" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="reduced_social_life" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="unhappy" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="anxious" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="angry" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="sad" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="irritable" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="sad_struggle" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="phase" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="jhi_date" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="user_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="self_rated_health" columnName="jhi_date" columnDataType="datetime"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

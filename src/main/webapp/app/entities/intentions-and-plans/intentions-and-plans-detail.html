@@ -1,0 +1,99 @@
+
+<div>
+    <h2><span>Intentions And Plans</span> {{vm.intentionsAndPlans.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>When To Exercise</span></dt>
+        <dd>
+            <span>{{vm.intentionsAndPlans.whenToExercise}}</span>
+        </dd>
+        <dt><span>Past Week Exercise</span></dt>
+        <dd>
+            <span>{{vm.intentionsAndPlans.pastWeekExercise}}</span>
+        </dd>
+        <dt><span>Exercise Where</span></dt>
+        <dd>
+            <span>{{vm.intentionsAndPlans.exerciseWhere}}</span>
+        </dd>
+        <dt><span>Exercise How</span></dt>
+        <dd>
+            <span>{{vm.intentionsAndPlans.exerciseHow}}</span>
+        </dd>
+        <dt><span>Exercise How Ofter</span></dt>
+        <dd>
+            <span>{{vm.intentionsAndPlans.exerciseHowOfter}}</span>
+        </dd>
+        <dt><span>Exercise With Whom</span></dt>
+        <dd>
+            <span>{{vm.intentionsAndPlans.exerciseWithWhom}}</span>
+        </dd>
+        <dt><span>Plans Interfere</span></dt>
+        <dd>
+            <span>{{vm.intentionsAndPlans.plansInterfere}}</span>
+        </dd>
+        <dt><span>Setbacks Cope</span></dt>
+        <dd>
+            <span>{{vm.intentionsAndPlans.setbacksCope}}</span>
+        </dd>
+        <dt><span>Difficult Situations</span></dt>
+        <dd>
+            <span>{{vm.intentionsAndPlans.difficultSituations}}</span>
+        </dd>
+        <dt><span>Good Opportunities</span></dt>
+        <dd>
+            <span>{{vm.intentionsAndPlans.goodOpportunities}}</span>
+        </dd>
+        <dt><span>Prevent Lapses</span></dt>
+        <dd>
+            <span>{{vm.intentionsAndPlans.preventLapses}}</span>
+        </dd>
+        <dt><span>Exercise Several Times Per Week</span></dt>
+        <dd>
+            <span>{{vm.intentionsAndPlans.exerciseSeveralTimesPerWeek}}</span>
+        </dd>
+        <dt><span>Work Up Sweat</span></dt>
+        <dd>
+            <span>{{vm.intentionsAndPlans.workUpSweat}}</span>
+        </dd>
+        <dt><span>Exercise Regularly</span></dt>
+        <dd>
+            <span>{{vm.intentionsAndPlans.exerciseRegularly}}</span>
+        </dd>
+        <dt><span>Minimum Physical Activity</span></dt>
+        <dd>
+            <span>{{vm.intentionsAndPlans.minimumPhysicalActivity}}</span>
+        </dd>
+        <dt><span>Leisure Time Activity</span></dt>
+        <dd>
+            <span>{{vm.intentionsAndPlans.leisureTimeActivity}}</span>
+        </dd>
+        <dt><span>Exercise During Rehabilitation</span></dt>
+        <dd>
+            <span>{{vm.intentionsAndPlans.exerciseDuringRehabilitation}}</span>
+        </dd>
+        <dt><span>Phase</span></dt>
+        <dd>
+            <span>{{vm.intentionsAndPlans.phase}}</span>
+        </dd>
+        <dt><span>Date</span></dt>
+        <dd>
+            <span>{{vm.intentionsAndPlans.date | date:'medium'}}</span>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+            {{vm.intentionsAndPlans.user.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="intentions-and-plans-detail.edit({id:vm.intentionsAndPlans.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

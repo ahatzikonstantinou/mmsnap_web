@@ -1,0 +1,70 @@
+<div>
+    <h2>Health Risks</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="health-risk.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Health Risk
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="smoking"><span>Smoking</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="physicalActivity"><span>Physical Activity</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="diet"><span>Diet</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="alcohol"><span>Alcohol</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="phase"><span>Phase</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="date"><span>Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="user.login"><span>User</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
+                <tr ng-repeat="healthRisk in vm.healthRisks track by healthRisk.id">
+                    <td><a ui-sref="health-risk-detail({id:healthRisk.id})">{{healthRisk.id}}</a></td>
+                    <td>{{healthRisk.smoking}}</td>
+                    <td>{{healthRisk.physicalActivity}}</td>
+                    <td>{{healthRisk.diet}}</td>
+                    <td>{{healthRisk.alcohol}}</td>
+                    <td>{{healthRisk.phase}}</td>
+                    <td>{{healthRisk.date | date:'medium'}}</td>
+                    <td>
+                        {{healthRisk.user.login}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="health-risk-detail({id:healthRisk.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="health-risk.edit({id:healthRisk.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="health-risk.delete({id:healthRisk.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

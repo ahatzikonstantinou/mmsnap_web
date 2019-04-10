@@ -1,0 +1,47 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "login"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "smoking",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "physicalActivity",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "diet",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "alcohol",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "phase",
+            "fieldType": "AssessmentPhase",
+            "fieldValues": "INITIAL,FINAL"
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20190410124128",
+    "entityTableName": "health_risk",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

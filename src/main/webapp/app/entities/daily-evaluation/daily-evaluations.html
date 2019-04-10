@@ -1,0 +1,80 @@
+<div>
+    <h2>Daily Evaluations</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="daily-evaluation.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Daily Evaluation
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="type"><span>Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="diet"><span>Diet</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="smoking"><span>Smoking</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="physicalActivity"><span>Physical Activity</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="alcohol"><span>Alcohol</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="ifStatement"><span>If Statement</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="thenStatement"><span>Then Statement</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="copingIfStatement"><span>Coping If Statement</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="copingThenStatement"><span>Coping Then Statement</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="success"><span>Success</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="date"><span>Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="user.login"><span>User</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
+                <tr ng-repeat="dailyEvaluation in vm.dailyEvaluations track by dailyEvaluation.id">
+                    <td><a ui-sref="daily-evaluation-detail({id:dailyEvaluation.id})">{{dailyEvaluation.id}}</a></td>
+                    <td>{{dailyEvaluation.type}}</td>
+                    <td>{{dailyEvaluation.diet}}</td>
+                    <td>{{dailyEvaluation.smoking}}</td>
+                    <td>{{dailyEvaluation.physicalActivity}}</td>
+                    <td>{{dailyEvaluation.alcohol}}</td>
+                    <td>{{dailyEvaluation.ifStatement}}</td>
+                    <td>{{dailyEvaluation.thenStatement}}</td>
+                    <td>{{dailyEvaluation.copingIfStatement}}</td>
+                    <td>{{dailyEvaluation.copingThenStatement}}</td>
+                    <td>{{dailyEvaluation.success}}</td>
+                    <td>{{dailyEvaluation.date | date:'medium'}}</td>
+                    <td>
+                        {{dailyEvaluation.user.login}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="daily-evaluation-detail({id:dailyEvaluation.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="daily-evaluation.edit({id:dailyEvaluation.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="daily-evaluation.delete({id:dailyEvaluation.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

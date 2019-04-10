@@ -1,0 +1,111 @@
+
+<div>
+    <h2><span>Self Rated Health</span> {{vm.selfRatedHealth.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>One Condition More Serious</span></dt>
+        <dd>
+            <span>{{vm.selfRatedHealth.oneConditionMoreSerious}}</span>
+        </dd>
+        <dt><span>Time Spent Managing</span></dt>
+        <dd>
+            <span>{{vm.selfRatedHealth.timeSpentManaging}}</span>
+        </dd>
+        <dt><span>Feel Overwhelmed</span></dt>
+        <dd>
+            <span>{{vm.selfRatedHealth.feelOverwhelmed}}</span>
+        </dd>
+        <dt><span>Causes Are Linked</span></dt>
+        <dd>
+            <span>{{vm.selfRatedHealth.causesAreLinked}}</span>
+        </dd>
+        <dt><span>Difficult All Medications</span></dt>
+        <dd>
+            <span>{{vm.selfRatedHealth.difficultAllMedications}}</span>
+        </dd>
+        <dt><span>Limited Activities</span></dt>
+        <dd>
+            <span>{{vm.selfRatedHealth.limitedActivities}}</span>
+        </dd>
+        <dt><span>Different Medications Problems</span></dt>
+        <dd>
+            <span>{{vm.selfRatedHealth.differentMedicationsProblems}}</span>
+        </dd>
+        <dt><span>Mixing Medications</span></dt>
+        <dd>
+            <span>{{vm.selfRatedHealth.mixingMedications}}</span>
+        </dd>
+        <dt><span>Less Effective Treatments</span></dt>
+        <dd>
+            <span>{{vm.selfRatedHealth.lessEffectiveTreatments}}</span>
+        </dd>
+        <dt><span>One Cause Another</span></dt>
+        <dd>
+            <span>{{vm.selfRatedHealth.oneCauseAnother}}</span>
+        </dd>
+        <dt><span>One Dominates</span></dt>
+        <dd>
+            <span>{{vm.selfRatedHealth.oneDominates}}</span>
+        </dd>
+        <dt><span>Conditions Interact</span></dt>
+        <dd>
+            <span>{{vm.selfRatedHealth.conditionsInteract}}</span>
+        </dd>
+        <dt><span>Difficult Best Treatment</span></dt>
+        <dd>
+            <span>{{vm.selfRatedHealth.difficultBestTreatment}}</span>
+        </dd>
+        <dt><span>Reduced Social Life</span></dt>
+        <dd>
+            <span>{{vm.selfRatedHealth.reducedSocialLife}}</span>
+        </dd>
+        <dt><span>Unhappy</span></dt>
+        <dd>
+            <span>{{vm.selfRatedHealth.unhappy}}</span>
+        </dd>
+        <dt><span>Anxious</span></dt>
+        <dd>
+            <span>{{vm.selfRatedHealth.anxious}}</span>
+        </dd>
+        <dt><span>Angry</span></dt>
+        <dd>
+            <span>{{vm.selfRatedHealth.angry}}</span>
+        </dd>
+        <dt><span>Sad</span></dt>
+        <dd>
+            <span>{{vm.selfRatedHealth.sad}}</span>
+        </dd>
+        <dt><span>Irritable</span></dt>
+        <dd>
+            <span>{{vm.selfRatedHealth.irritable}}</span>
+        </dd>
+        <dt><span>Sad Struggle</span></dt>
+        <dd>
+            <span>{{vm.selfRatedHealth.sadStruggle}}</span>
+        </dd>
+        <dt><span>Phase</span></dt>
+        <dd>
+            <span>{{vm.selfRatedHealth.phase}}</span>
+        </dd>
+        <dt><span>Date</span></dt>
+        <dd>
+            <span>{{vm.selfRatedHealth.date | date:'medium'}}</span>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+            {{vm.selfRatedHealth.user.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="self-rated-health-detail.edit({id:vm.selfRatedHealth.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

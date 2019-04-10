@@ -1,0 +1,67 @@
+
+<div>
+    <h2><span>Daily Evaluation</span> {{vm.dailyEvaluation.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Type</span></dt>
+        <dd>
+            <span>{{vm.dailyEvaluation.type}}</span>
+        </dd>
+        <dt><span>Diet</span></dt>
+        <dd>
+            <span>{{vm.dailyEvaluation.diet}}</span>
+        </dd>
+        <dt><span>Smoking</span></dt>
+        <dd>
+            <span>{{vm.dailyEvaluation.smoking}}</span>
+        </dd>
+        <dt><span>Physical Activity</span></dt>
+        <dd>
+            <span>{{vm.dailyEvaluation.physicalActivity}}</span>
+        </dd>
+        <dt><span>Alcohol</span></dt>
+        <dd>
+            <span>{{vm.dailyEvaluation.alcohol}}</span>
+        </dd>
+        <dt><span>If Statement</span></dt>
+        <dd>
+            <span>{{vm.dailyEvaluation.ifStatement}}</span>
+        </dd>
+        <dt><span>Then Statement</span></dt>
+        <dd>
+            <span>{{vm.dailyEvaluation.thenStatement}}</span>
+        </dd>
+        <dt><span>Coping If Statement</span></dt>
+        <dd>
+            <span>{{vm.dailyEvaluation.copingIfStatement}}</span>
+        </dd>
+        <dt><span>Coping Then Statement</span></dt>
+        <dd>
+            <span>{{vm.dailyEvaluation.copingThenStatement}}</span>
+        </dd>
+        <dt><span>Success</span></dt>
+        <dd>
+            <span>{{vm.dailyEvaluation.success}}</span>
+        </dd>
+        <dt><span>Date</span></dt>
+        <dd>
+            <span>{{vm.dailyEvaluation.date | date:'medium'}}</span>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+            {{vm.dailyEvaluation.user.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="daily-evaluation-detail.edit({id:vm.dailyEvaluation.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

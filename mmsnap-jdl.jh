@@ -1,0 +1,119 @@
+enum AssessmentPhase {
+    INITIAL, FINAL
+}
+
+entity HealthRisk {
+	smoking Boolean,
+    physicalActivity Boolean,
+    diet Boolean,
+    alcohol Boolean,
+    phase AssessmentPhase,
+    date Instant required
+}
+
+entity EQVas {
+	score Integer required,
+    phase AssessmentPhase,
+    date Instant required
+}
+
+entity SelfEfficacy {
+    healthierLifestyle Boolean,
+    completeBehaviourGoals Boolean,
+    manageMultimorbidity Boolean,
+    phase AssessmentPhase required,
+    date Instant required
+}
+
+entity IntentionsAndPlans {
+    whenToExercise Boolean,
+    pastWeekExercise Boolean,
+    exerciseWhere Boolean,
+    exerciseHow Boolean,
+    exerciseHowOfter Boolean,
+    exerciseWithWhom Boolean,
+    plansInterfere Boolean,
+    setbacksCope Boolean,
+    difficultSituations Boolean,
+    goodOpportunities Boolean,
+    preventLapses Boolean,
+    exerciseSeveralTimesPerWeek Boolean,
+    workUpSweat Boolean,
+    exerciseRegularly Boolean,
+    minimumPhysicalActivity Boolean,
+    leisureTimeActivity Boolean,
+    exerciseDuringRehabilitation Boolean,
+    phase AssessmentPhase required,
+    date Instant required
+}
+
+enum HealthScale {
+    STRONGLY_DISAGREE, DISAGREE, AGREE, STRONGLY_AGREE
+}
+
+entity SelfRatedHealth{
+    oneConditionMoreSerious HealthScale required,
+    timeSpentManaging HealthScale required,
+    feelOverwhelmed HealthScale required,
+    causesAreLinked HealthScale required,
+    difficultAllMedications HealthScale required,
+    limitedActivities HealthScale required,
+    differentMedicationsProblems HealthScale required,
+    mixingMedications HealthScale required,
+    lessEffectiveTreatments HealthScale required,
+    oneCauseAnother HealthScale required,
+    oneDominates HealthScale required,
+    conditionsInteract HealthScale required,
+    difficultBestTreatment HealthScale required,
+    reducedSocialLife HealthScale required,
+    unhappy HealthScale required,
+    anxious HealthScale required,
+    angry HealthScale required,
+    sad HealthScale required,
+    irritable HealthScale required,
+    sadStruggle HealthScale required,
+    phase AssessmentPhase required,
+    date Instant required
+}
+
+entity WeeklyEvaluation {
+    diet Integer,
+    smoking Integer,
+    physicalActivity Integer,
+    alcohol Integer,
+    year Integer required,
+    weekOfYear Integer required,
+    date Instant required
+}
+
+enum PlanType {
+    ACTION, COPING
+}
+
+entity DailyEvaluation {
+    type PlanType required,
+    diet Boolean,
+    smoking Boolean,
+    physicalActivity Boolean,
+    alcohol Boolean,
+    ifStatement String,
+    thenStatement String,
+    copingIfStatement String,
+    copingThenStatement String,
+    success Boolean required,
+    date Instant required
+}
+
+relationship ManyToOne {
+	HealthRisk{user(login)} to User,
+    EQVas{user(login)} to User,
+    SelfEfficacy{user(login)} to User,
+    IntentionsAndPlans{user(login)} to User,
+    SelfRatedHealth{user(login)} to User,
+    WeeklyEvaluation{user(login)} to User,
+    DailyEvaluation{user(login)} to User
+}
+
+// Set pagination options
+paginate HealthRisk, EQVas, SelfEfficacy, IntentionsAndPlans, SelfRatedHealth, WeeklyEvaluation, DailyEvaluation with infinite-scroll
+

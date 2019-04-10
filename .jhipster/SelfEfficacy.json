@@ -1,0 +1,46 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "login"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "healthierLifestyle",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "completeBehaviourGoals",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "manageMultimorbidity",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "phase",
+            "fieldType": "AssessmentPhase",
+            "fieldValues": "INITIAL,FINAL",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20190410160212",
+    "entityTableName": "self_efficacy",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

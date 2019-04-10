@@ -1,0 +1,47 @@
+
+<div>
+    <h2><span>Health Risk</span> {{vm.healthRisk.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Smoking</span></dt>
+        <dd>
+            <span>{{vm.healthRisk.smoking}}</span>
+        </dd>
+        <dt><span>Physical Activity</span></dt>
+        <dd>
+            <span>{{vm.healthRisk.physicalActivity}}</span>
+        </dd>
+        <dt><span>Diet</span></dt>
+        <dd>
+            <span>{{vm.healthRisk.diet}}</span>
+        </dd>
+        <dt><span>Alcohol</span></dt>
+        <dd>
+            <span>{{vm.healthRisk.alcohol}}</span>
+        </dd>
+        <dt><span>Phase</span></dt>
+        <dd>
+            <span>{{vm.healthRisk.phase}}</span>
+        </dd>
+        <dt><span>Date</span></dt>
+        <dd>
+            <span>{{vm.healthRisk.date | date:'medium'}}</span>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+            {{vm.healthRisk.user.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="health-risk-detail.edit({id:vm.healthRisk.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,120 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myDailyEvaluationLabel">Create or edit a Daily Evaluation</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.dailyEvaluation.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.dailyEvaluation.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_type">Type</label>
+            <select class="form-control" name="type" ng-model="vm.dailyEvaluation.type" id="field_type" required>
+                <option value="ACTION">ACTION</option>
+                <option value="COPING">COPING</option>
+            </select>
+            <div ng-show="editForm.type.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.type.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_diet">Diet</label>
+                <input type="checkbox" name="diet" id="field_diet"
+                          ng-model="vm.dailyEvaluation.diet"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_smoking">Smoking</label>
+                <input type="checkbox" name="smoking" id="field_smoking"
+                          ng-model="vm.dailyEvaluation.smoking"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_physicalActivity">Physical Activity</label>
+                <input type="checkbox" name="physicalActivity" id="field_physicalActivity"
+                          ng-model="vm.dailyEvaluation.physicalActivity"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_alcohol">Alcohol</label>
+                <input type="checkbox" name="alcohol" id="field_alcohol"
+                          ng-model="vm.dailyEvaluation.alcohol"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_ifStatement">If Statement</label>
+            <input type="text" class="form-control" name="ifStatement" id="field_ifStatement"
+                    ng-model="vm.dailyEvaluation.ifStatement"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_thenStatement">Then Statement</label>
+            <input type="text" class="form-control" name="thenStatement" id="field_thenStatement"
+                    ng-model="vm.dailyEvaluation.thenStatement"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_copingIfStatement">Coping If Statement</label>
+            <input type="text" class="form-control" name="copingIfStatement" id="field_copingIfStatement"
+                    ng-model="vm.dailyEvaluation.copingIfStatement"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_copingThenStatement">Coping Then Statement</label>
+            <input type="text" class="form-control" name="copingThenStatement" id="field_copingThenStatement"
+                    ng-model="vm.dailyEvaluation.copingThenStatement"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_success">Success</label>
+                <input type="checkbox" name="success" id="field_success"
+                          ng-model="vm.dailyEvaluation.success"/>
+            <div ng-show="editForm.success.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.success.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_date">Date</label>
+                <div class="input-group">
+                    <input id="field_date" type="text" class="form-control" name="date" datetime-picker="{{dateformat}}" ng-model="vm.dailyEvaluation.date" is-open="vm.datePickerOpenStatus.date"
+                    required/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('date')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            <div ng-show="editForm.date.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.date.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.date.$error.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" ng-model="vm.dailyEvaluation.user" ng-options="user as user.login for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,96 @@
+<div>
+    <h2>Intentions And Plans</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="intentions-and-plans.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Intentions And Plans
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="whenToExercise"><span>When To Exercise</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="pastWeekExercise"><span>Past Week Exercise</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="exerciseWhere"><span>Exercise Where</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="exerciseHow"><span>Exercise How</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="exerciseHowOfter"><span>Exercise How Ofter</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="exerciseWithWhom"><span>Exercise With Whom</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="plansInterfere"><span>Plans Interfere</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="setbacksCope"><span>Setbacks Cope</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="difficultSituations"><span>Difficult Situations</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="goodOpportunities"><span>Good Opportunities</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="preventLapses"><span>Prevent Lapses</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="exerciseSeveralTimesPerWeek"><span>Exercise Several Times Per Week</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="workUpSweat"><span>Work Up Sweat</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="exerciseRegularly"><span>Exercise Regularly</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="minimumPhysicalActivity"><span>Minimum Physical Activity</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="leisureTimeActivity"><span>Leisure Time Activity</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="exerciseDuringRehabilitation"><span>Exercise During Rehabilitation</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="phase"><span>Phase</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="date"><span>Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="user.login"><span>User</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
+                <tr ng-repeat="intentionsAndPlans in vm.intentionsAndPlans track by intentionsAndPlans.id">
+                    <td><a ui-sref="intentions-and-plans-detail({id:intentionsAndPlans.id})">{{intentionsAndPlans.id}}</a></td>
+                    <td>{{intentionsAndPlans.whenToExercise}}</td>
+                    <td>{{intentionsAndPlans.pastWeekExercise}}</td>
+                    <td>{{intentionsAndPlans.exerciseWhere}}</td>
+                    <td>{{intentionsAndPlans.exerciseHow}}</td>
+                    <td>{{intentionsAndPlans.exerciseHowOfter}}</td>
+                    <td>{{intentionsAndPlans.exerciseWithWhom}}</td>
+                    <td>{{intentionsAndPlans.plansInterfere}}</td>
+                    <td>{{intentionsAndPlans.setbacksCope}}</td>
+                    <td>{{intentionsAndPlans.difficultSituations}}</td>
+                    <td>{{intentionsAndPlans.goodOpportunities}}</td>
+                    <td>{{intentionsAndPlans.preventLapses}}</td>
+                    <td>{{intentionsAndPlans.exerciseSeveralTimesPerWeek}}</td>
+                    <td>{{intentionsAndPlans.workUpSweat}}</td>
+                    <td>{{intentionsAndPlans.exerciseRegularly}}</td>
+                    <td>{{intentionsAndPlans.minimumPhysicalActivity}}</td>
+                    <td>{{intentionsAndPlans.leisureTimeActivity}}</td>
+                    <td>{{intentionsAndPlans.exerciseDuringRehabilitation}}</td>
+                    <td>{{intentionsAndPlans.phase}}</td>
+                    <td>{{intentionsAndPlans.date | date:'medium'}}</td>
+                    <td>
+                        {{intentionsAndPlans.user.login}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="intentions-and-plans-detail({id:intentionsAndPlans.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="intentions-and-plans.edit({id:intentionsAndPlans.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="intentions-and-plans.delete({id:intentionsAndPlans.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,102 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "login"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "whenToExercise",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "pastWeekExercise",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "exerciseWhere",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "exerciseHow",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "exerciseHowOfter",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "exerciseWithWhom",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "plansInterfere",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "setbacksCope",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "difficultSituations",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "goodOpportunities",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "preventLapses",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "exerciseSeveralTimesPerWeek",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "workUpSweat",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "exerciseRegularly",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "minimumPhysicalActivity",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "leisureTimeActivity",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "exerciseDuringRehabilitation",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "phase",
+            "fieldType": "AssessmentPhase",
+            "fieldValues": "INITIAL,FINAL",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20190410160213",
+    "entityTableName": "intentions_and_plans",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

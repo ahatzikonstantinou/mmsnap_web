@@ -1,0 +1,194 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "login"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "oneConditionMoreSerious",
+            "fieldType": "HealthScale",
+            "fieldValues": "STRONGLY_DISAGREE,DISAGREE,AGREE,STRONGLY_AGREE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "timeSpentManaging",
+            "fieldType": "HealthScale",
+            "fieldValues": "STRONGLY_DISAGREE,DISAGREE,AGREE,STRONGLY_AGREE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "feelOverwhelmed",
+            "fieldType": "HealthScale",
+            "fieldValues": "STRONGLY_DISAGREE,DISAGREE,AGREE,STRONGLY_AGREE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "causesAreLinked",
+            "fieldType": "HealthScale",
+            "fieldValues": "STRONGLY_DISAGREE,DISAGREE,AGREE,STRONGLY_AGREE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "difficultAllMedications",
+            "fieldType": "HealthScale",
+            "fieldValues": "STRONGLY_DISAGREE,DISAGREE,AGREE,STRONGLY_AGREE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "limitedActivities",
+            "fieldType": "HealthScale",
+            "fieldValues": "STRONGLY_DISAGREE,DISAGREE,AGREE,STRONGLY_AGREE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "differentMedicationsProblems",
+            "fieldType": "HealthScale",
+            "fieldValues": "STRONGLY_DISAGREE,DISAGREE,AGREE,STRONGLY_AGREE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "mixingMedications",
+            "fieldType": "HealthScale",
+            "fieldValues": "STRONGLY_DISAGREE,DISAGREE,AGREE,STRONGLY_AGREE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "lessEffectiveTreatments",
+            "fieldType": "HealthScale",
+            "fieldValues": "STRONGLY_DISAGREE,DISAGREE,AGREE,STRONGLY_AGREE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "oneCauseAnother",
+            "fieldType": "HealthScale",
+            "fieldValues": "STRONGLY_DISAGREE,DISAGREE,AGREE,STRONGLY_AGREE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "oneDominates",
+            "fieldType": "HealthScale",
+            "fieldValues": "STRONGLY_DISAGREE,DISAGREE,AGREE,STRONGLY_AGREE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "conditionsInteract",
+            "fieldType": "HealthScale",
+            "fieldValues": "STRONGLY_DISAGREE,DISAGREE,AGREE,STRONGLY_AGREE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "difficultBestTreatment",
+            "fieldType": "HealthScale",
+            "fieldValues": "STRONGLY_DISAGREE,DISAGREE,AGREE,STRONGLY_AGREE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "reducedSocialLife",
+            "fieldType": "HealthScale",
+            "fieldValues": "STRONGLY_DISAGREE,DISAGREE,AGREE,STRONGLY_AGREE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "unhappy",
+            "fieldType": "HealthScale",
+            "fieldValues": "STRONGLY_DISAGREE,DISAGREE,AGREE,STRONGLY_AGREE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "anxious",
+            "fieldType": "HealthScale",
+            "fieldValues": "STRONGLY_DISAGREE,DISAGREE,AGREE,STRONGLY_AGREE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "angry",
+            "fieldType": "HealthScale",
+            "fieldValues": "STRONGLY_DISAGREE,DISAGREE,AGREE,STRONGLY_AGREE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "sad",
+            "fieldType": "HealthScale",
+            "fieldValues": "STRONGLY_DISAGREE,DISAGREE,AGREE,STRONGLY_AGREE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "irritable",
+            "fieldType": "HealthScale",
+            "fieldValues": "STRONGLY_DISAGREE,DISAGREE,AGREE,STRONGLY_AGREE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "sadStruggle",
+            "fieldType": "HealthScale",
+            "fieldValues": "STRONGLY_DISAGREE,DISAGREE,AGREE,STRONGLY_AGREE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "phase",
+            "fieldType": "AssessmentPhase",
+            "fieldValues": "INITIAL,FINAL",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20190410160214",
+    "entityTableName": "self_rated_health",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

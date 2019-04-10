@@ -1,0 +1,102 @@
+<div>
+    <h2>Self Rated Healths</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="self-rated-health.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Self Rated Health
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="oneConditionMoreSerious"><span>One Condition More Serious</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="timeSpentManaging"><span>Time Spent Managing</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="feelOverwhelmed"><span>Feel Overwhelmed</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="causesAreLinked"><span>Causes Are Linked</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="difficultAllMedications"><span>Difficult All Medications</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="limitedActivities"><span>Limited Activities</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="differentMedicationsProblems"><span>Different Medications Problems</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="mixingMedications"><span>Mixing Medications</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lessEffectiveTreatments"><span>Less Effective Treatments</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="oneCauseAnother"><span>One Cause Another</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="oneDominates"><span>One Dominates</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="conditionsInteract"><span>Conditions Interact</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="difficultBestTreatment"><span>Difficult Best Treatment</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="reducedSocialLife"><span>Reduced Social Life</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="unhappy"><span>Unhappy</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="anxious"><span>Anxious</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="angry"><span>Angry</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sad"><span>Sad</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="irritable"><span>Irritable</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sadStruggle"><span>Sad Struggle</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="phase"><span>Phase</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="date"><span>Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="user.login"><span>User</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
+                <tr ng-repeat="selfRatedHealth in vm.selfRatedHealths track by selfRatedHealth.id">
+                    <td><a ui-sref="self-rated-health-detail({id:selfRatedHealth.id})">{{selfRatedHealth.id}}</a></td>
+                    <td>{{selfRatedHealth.oneConditionMoreSerious}}</td>
+                    <td>{{selfRatedHealth.timeSpentManaging}}</td>
+                    <td>{{selfRatedHealth.feelOverwhelmed}}</td>
+                    <td>{{selfRatedHealth.causesAreLinked}}</td>
+                    <td>{{selfRatedHealth.difficultAllMedications}}</td>
+                    <td>{{selfRatedHealth.limitedActivities}}</td>
+                    <td>{{selfRatedHealth.differentMedicationsProblems}}</td>
+                    <td>{{selfRatedHealth.mixingMedications}}</td>
+                    <td>{{selfRatedHealth.lessEffectiveTreatments}}</td>
+                    <td>{{selfRatedHealth.oneCauseAnother}}</td>
+                    <td>{{selfRatedHealth.oneDominates}}</td>
+                    <td>{{selfRatedHealth.conditionsInteract}}</td>
+                    <td>{{selfRatedHealth.difficultBestTreatment}}</td>
+                    <td>{{selfRatedHealth.reducedSocialLife}}</td>
+                    <td>{{selfRatedHealth.unhappy}}</td>
+                    <td>{{selfRatedHealth.anxious}}</td>
+                    <td>{{selfRatedHealth.angry}}</td>
+                    <td>{{selfRatedHealth.sad}}</td>
+                    <td>{{selfRatedHealth.irritable}}</td>
+                    <td>{{selfRatedHealth.sadStruggle}}</td>
+                    <td>{{selfRatedHealth.phase}}</td>
+                    <td>{{selfRatedHealth.date | date:'medium'}}</td>
+                    <td>
+                        {{selfRatedHealth.user.login}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="self-rated-health-detail({id:selfRatedHealth.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="self-rated-health.edit({id:selfRatedHealth.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="self-rated-health.delete({id:selfRatedHealth.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

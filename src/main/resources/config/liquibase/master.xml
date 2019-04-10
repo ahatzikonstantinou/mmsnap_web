@@ -5,6 +5,20 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190410124128_added_entity_HealthRisk.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190410124129_added_entity_EQVas.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190410160212_added_entity_SelfEfficacy.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190410160213_added_entity_IntentionsAndPlans.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190410160214_added_entity_SelfRatedHealth.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190410160215_added_entity_WeeklyEvaluation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190410160216_added_entity_DailyEvaluation.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20190410124128_added_entity_constraints_HealthRisk.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190410124129_added_entity_constraints_EQVas.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190410160212_added_entity_constraints_SelfEfficacy.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190410160213_added_entity_constraints_IntentionsAndPlans.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190410160214_added_entity_constraints_SelfRatedHealth.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190410160215_added_entity_constraints_WeeklyEvaluation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190410160216_added_entity_constraints_DailyEvaluation.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

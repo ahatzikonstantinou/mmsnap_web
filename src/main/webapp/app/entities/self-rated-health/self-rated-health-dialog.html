@@ -1,0 +1,365 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="mySelfRatedHealthLabel">Create or edit a Self Rated Health</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.selfRatedHealth.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.selfRatedHealth.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_oneConditionMoreSerious">One Condition More Serious</label>
+            <select class="form-control" name="oneConditionMoreSerious" ng-model="vm.selfRatedHealth.oneConditionMoreSerious" id="field_oneConditionMoreSerious" required>
+                <option value="STRONGLY_DISAGREE">STRONGLY_DISAGREE</option>
+                <option value="DISAGREE">DISAGREE</option>
+                <option value="AGREE">AGREE</option>
+                <option value="STRONGLY_AGREE">STRONGLY_AGREE</option>
+            </select>
+            <div ng-show="editForm.oneConditionMoreSerious.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.oneConditionMoreSerious.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_timeSpentManaging">Time Spent Managing</label>
+            <select class="form-control" name="timeSpentManaging" ng-model="vm.selfRatedHealth.timeSpentManaging" id="field_timeSpentManaging" required>
+                <option value="STRONGLY_DISAGREE">STRONGLY_DISAGREE</option>
+                <option value="DISAGREE">DISAGREE</option>
+                <option value="AGREE">AGREE</option>
+                <option value="STRONGLY_AGREE">STRONGLY_AGREE</option>
+            </select>
+            <div ng-show="editForm.timeSpentManaging.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.timeSpentManaging.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_feelOverwhelmed">Feel Overwhelmed</label>
+            <select class="form-control" name="feelOverwhelmed" ng-model="vm.selfRatedHealth.feelOverwhelmed" id="field_feelOverwhelmed" required>
+                <option value="STRONGLY_DISAGREE">STRONGLY_DISAGREE</option>
+                <option value="DISAGREE">DISAGREE</option>
+                <option value="AGREE">AGREE</option>
+                <option value="STRONGLY_AGREE">STRONGLY_AGREE</option>
+            </select>
+            <div ng-show="editForm.feelOverwhelmed.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.feelOverwhelmed.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_causesAreLinked">Causes Are Linked</label>
+            <select class="form-control" name="causesAreLinked" ng-model="vm.selfRatedHealth.causesAreLinked" id="field_causesAreLinked" required>
+                <option value="STRONGLY_DISAGREE">STRONGLY_DISAGREE</option>
+                <option value="DISAGREE">DISAGREE</option>
+                <option value="AGREE">AGREE</option>
+                <option value="STRONGLY_AGREE">STRONGLY_AGREE</option>
+            </select>
+            <div ng-show="editForm.causesAreLinked.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.causesAreLinked.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_difficultAllMedications">Difficult All Medications</label>
+            <select class="form-control" name="difficultAllMedications" ng-model="vm.selfRatedHealth.difficultAllMedications" id="field_difficultAllMedications" required>
+                <option value="STRONGLY_DISAGREE">STRONGLY_DISAGREE</option>
+                <option value="DISAGREE">DISAGREE</option>
+                <option value="AGREE">AGREE</option>
+                <option value="STRONGLY_AGREE">STRONGLY_AGREE</option>
+            </select>
+            <div ng-show="editForm.difficultAllMedications.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.difficultAllMedications.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_limitedActivities">Limited Activities</label>
+            <select class="form-control" name="limitedActivities" ng-model="vm.selfRatedHealth.limitedActivities" id="field_limitedActivities" required>
+                <option value="STRONGLY_DISAGREE">STRONGLY_DISAGREE</option>
+                <option value="DISAGREE">DISAGREE</option>
+                <option value="AGREE">AGREE</option>
+                <option value="STRONGLY_AGREE">STRONGLY_AGREE</option>
+            </select>
+            <div ng-show="editForm.limitedActivities.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.limitedActivities.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_differentMedicationsProblems">Different Medications Problems</label>
+            <select class="form-control" name="differentMedicationsProblems" ng-model="vm.selfRatedHealth.differentMedicationsProblems" id="field_differentMedicationsProblems" required>
+                <option value="STRONGLY_DISAGREE">STRONGLY_DISAGREE</option>
+                <option value="DISAGREE">DISAGREE</option>
+                <option value="AGREE">AGREE</option>
+                <option value="STRONGLY_AGREE">STRONGLY_AGREE</option>
+            </select>
+            <div ng-show="editForm.differentMedicationsProblems.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.differentMedicationsProblems.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_mixingMedications">Mixing Medications</label>
+            <select class="form-control" name="mixingMedications" ng-model="vm.selfRatedHealth.mixingMedications" id="field_mixingMedications" required>
+                <option value="STRONGLY_DISAGREE">STRONGLY_DISAGREE</option>
+                <option value="DISAGREE">DISAGREE</option>
+                <option value="AGREE">AGREE</option>
+                <option value="STRONGLY_AGREE">STRONGLY_AGREE</option>
+            </select>
+            <div ng-show="editForm.mixingMedications.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.mixingMedications.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_lessEffectiveTreatments">Less Effective Treatments</label>
+            <select class="form-control" name="lessEffectiveTreatments" ng-model="vm.selfRatedHealth.lessEffectiveTreatments" id="field_lessEffectiveTreatments" required>
+                <option value="STRONGLY_DISAGREE">STRONGLY_DISAGREE</option>
+                <option value="DISAGREE">DISAGREE</option>
+                <option value="AGREE">AGREE</option>
+                <option value="STRONGLY_AGREE">STRONGLY_AGREE</option>
+            </select>
+            <div ng-show="editForm.lessEffectiveTreatments.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.lessEffectiveTreatments.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_oneCauseAnother">One Cause Another</label>
+            <select class="form-control" name="oneCauseAnother" ng-model="vm.selfRatedHealth.oneCauseAnother" id="field_oneCauseAnother" required>
+                <option value="STRONGLY_DISAGREE">STRONGLY_DISAGREE</option>
+                <option value="DISAGREE">DISAGREE</option>
+                <option value="AGREE">AGREE</option>
+                <option value="STRONGLY_AGREE">STRONGLY_AGREE</option>
+            </select>
+            <div ng-show="editForm.oneCauseAnother.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.oneCauseAnother.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_oneDominates">One Dominates</label>
+            <select class="form-control" name="oneDominates" ng-model="vm.selfRatedHealth.oneDominates" id="field_oneDominates" required>
+                <option value="STRONGLY_DISAGREE">STRONGLY_DISAGREE</option>
+                <option value="DISAGREE">DISAGREE</option>
+                <option value="AGREE">AGREE</option>
+                <option value="STRONGLY_AGREE">STRONGLY_AGREE</option>
+            </select>
+            <div ng-show="editForm.oneDominates.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.oneDominates.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_conditionsInteract">Conditions Interact</label>
+            <select class="form-control" name="conditionsInteract" ng-model="vm.selfRatedHealth.conditionsInteract" id="field_conditionsInteract" required>
+                <option value="STRONGLY_DISAGREE">STRONGLY_DISAGREE</option>
+                <option value="DISAGREE">DISAGREE</option>
+                <option value="AGREE">AGREE</option>
+                <option value="STRONGLY_AGREE">STRONGLY_AGREE</option>
+            </select>
+            <div ng-show="editForm.conditionsInteract.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.conditionsInteract.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_difficultBestTreatment">Difficult Best Treatment</label>
+            <select class="form-control" name="difficultBestTreatment" ng-model="vm.selfRatedHealth.difficultBestTreatment" id="field_difficultBestTreatment" required>
+                <option value="STRONGLY_DISAGREE">STRONGLY_DISAGREE</option>
+                <option value="DISAGREE">DISAGREE</option>
+                <option value="AGREE">AGREE</option>
+                <option value="STRONGLY_AGREE">STRONGLY_AGREE</option>
+            </select>
+            <div ng-show="editForm.difficultBestTreatment.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.difficultBestTreatment.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_reducedSocialLife">Reduced Social Life</label>
+            <select class="form-control" name="reducedSocialLife" ng-model="vm.selfRatedHealth.reducedSocialLife" id="field_reducedSocialLife" required>
+                <option value="STRONGLY_DISAGREE">STRONGLY_DISAGREE</option>
+                <option value="DISAGREE">DISAGREE</option>
+                <option value="AGREE">AGREE</option>
+                <option value="STRONGLY_AGREE">STRONGLY_AGREE</option>
+            </select>
+            <div ng-show="editForm.reducedSocialLife.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.reducedSocialLife.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_unhappy">Unhappy</label>
+            <select class="form-control" name="unhappy" ng-model="vm.selfRatedHealth.unhappy" id="field_unhappy" required>
+                <option value="STRONGLY_DISAGREE">STRONGLY_DISAGREE</option>
+                <option value="DISAGREE">DISAGREE</option>
+                <option value="AGREE">AGREE</option>
+                <option value="STRONGLY_AGREE">STRONGLY_AGREE</option>
+            </select>
+            <div ng-show="editForm.unhappy.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.unhappy.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_anxious">Anxious</label>
+            <select class="form-control" name="anxious" ng-model="vm.selfRatedHealth.anxious" id="field_anxious" required>
+                <option value="STRONGLY_DISAGREE">STRONGLY_DISAGREE</option>
+                <option value="DISAGREE">DISAGREE</option>
+                <option value="AGREE">AGREE</option>
+                <option value="STRONGLY_AGREE">STRONGLY_AGREE</option>
+            </select>
+            <div ng-show="editForm.anxious.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.anxious.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_angry">Angry</label>
+            <select class="form-control" name="angry" ng-model="vm.selfRatedHealth.angry" id="field_angry" required>
+                <option value="STRONGLY_DISAGREE">STRONGLY_DISAGREE</option>
+                <option value="DISAGREE">DISAGREE</option>
+                <option value="AGREE">AGREE</option>
+                <option value="STRONGLY_AGREE">STRONGLY_AGREE</option>
+            </select>
+            <div ng-show="editForm.angry.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.angry.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_sad">Sad</label>
+            <select class="form-control" name="sad" ng-model="vm.selfRatedHealth.sad" id="field_sad" required>
+                <option value="STRONGLY_DISAGREE">STRONGLY_DISAGREE</option>
+                <option value="DISAGREE">DISAGREE</option>
+                <option value="AGREE">AGREE</option>
+                <option value="STRONGLY_AGREE">STRONGLY_AGREE</option>
+            </select>
+            <div ng-show="editForm.sad.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.sad.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_irritable">Irritable</label>
+            <select class="form-control" name="irritable" ng-model="vm.selfRatedHealth.irritable" id="field_irritable" required>
+                <option value="STRONGLY_DISAGREE">STRONGLY_DISAGREE</option>
+                <option value="DISAGREE">DISAGREE</option>
+                <option value="AGREE">AGREE</option>
+                <option value="STRONGLY_AGREE">STRONGLY_AGREE</option>
+            </select>
+            <div ng-show="editForm.irritable.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.irritable.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_sadStruggle">Sad Struggle</label>
+            <select class="form-control" name="sadStruggle" ng-model="vm.selfRatedHealth.sadStruggle" id="field_sadStruggle" required>
+                <option value="STRONGLY_DISAGREE">STRONGLY_DISAGREE</option>
+                <option value="DISAGREE">DISAGREE</option>
+                <option value="AGREE">AGREE</option>
+                <option value="STRONGLY_AGREE">STRONGLY_AGREE</option>
+            </select>
+            <div ng-show="editForm.sadStruggle.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.sadStruggle.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_phase">Phase</label>
+            <select class="form-control" name="phase" ng-model="vm.selfRatedHealth.phase" id="field_phase" required>
+                <option value="INITIAL">INITIAL</option>
+                <option value="FINAL">FINAL</option>
+            </select>
+            <div ng-show="editForm.phase.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.phase.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_date">Date</label>
+                <div class="input-group">
+                    <input id="field_date" type="text" class="form-control" name="date" datetime-picker="{{dateformat}}" ng-model="vm.selfRatedHealth.date" is-open="vm.datePickerOpenStatus.date"
+                    required/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('date')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            <div ng-show="editForm.date.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.date.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.date.$error.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" ng-model="vm.selfRatedHealth.user" ng-options="user as user.login for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

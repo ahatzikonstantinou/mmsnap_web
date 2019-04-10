@@ -1,0 +1,43 @@
+
+<div>
+    <h2><span>Self Efficacy</span> {{vm.selfEfficacy.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Healthier Lifestyle</span></dt>
+        <dd>
+            <span>{{vm.selfEfficacy.healthierLifestyle}}</span>
+        </dd>
+        <dt><span>Complete Behaviour Goals</span></dt>
+        <dd>
+            <span>{{vm.selfEfficacy.completeBehaviourGoals}}</span>
+        </dd>
+        <dt><span>Manage Multimorbidity</span></dt>
+        <dd>
+            <span>{{vm.selfEfficacy.manageMultimorbidity}}</span>
+        </dd>
+        <dt><span>Phase</span></dt>
+        <dd>
+            <span>{{vm.selfEfficacy.phase}}</span>
+        </dd>
+        <dt><span>Date</span></dt>
+        <dd>
+            <span>{{vm.selfEfficacy.date | date:'medium'}}</span>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+            {{vm.selfEfficacy.user.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="self-efficacy-detail.edit({id:vm.selfEfficacy.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

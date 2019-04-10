@@ -1,0 +1,150 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myIntentionsAndPlansLabel">Create or edit a Intentions And Plans</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.intentionsAndPlans.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.intentionsAndPlans.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_whenToExercise">When To Exercise</label>
+                <input type="checkbox" name="whenToExercise" id="field_whenToExercise"
+                          ng-model="vm.intentionsAndPlans.whenToExercise"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_pastWeekExercise">Past Week Exercise</label>
+                <input type="checkbox" name="pastWeekExercise" id="field_pastWeekExercise"
+                          ng-model="vm.intentionsAndPlans.pastWeekExercise"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_exerciseWhere">Exercise Where</label>
+                <input type="checkbox" name="exerciseWhere" id="field_exerciseWhere"
+                          ng-model="vm.intentionsAndPlans.exerciseWhere"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_exerciseHow">Exercise How</label>
+                <input type="checkbox" name="exerciseHow" id="field_exerciseHow"
+                          ng-model="vm.intentionsAndPlans.exerciseHow"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_exerciseHowOfter">Exercise How Ofter</label>
+                <input type="checkbox" name="exerciseHowOfter" id="field_exerciseHowOfter"
+                          ng-model="vm.intentionsAndPlans.exerciseHowOfter"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_exerciseWithWhom">Exercise With Whom</label>
+                <input type="checkbox" name="exerciseWithWhom" id="field_exerciseWithWhom"
+                          ng-model="vm.intentionsAndPlans.exerciseWithWhom"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_plansInterfere">Plans Interfere</label>
+                <input type="checkbox" name="plansInterfere" id="field_plansInterfere"
+                          ng-model="vm.intentionsAndPlans.plansInterfere"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_setbacksCope">Setbacks Cope</label>
+                <input type="checkbox" name="setbacksCope" id="field_setbacksCope"
+                          ng-model="vm.intentionsAndPlans.setbacksCope"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_difficultSituations">Difficult Situations</label>
+                <input type="checkbox" name="difficultSituations" id="field_difficultSituations"
+                          ng-model="vm.intentionsAndPlans.difficultSituations"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_goodOpportunities">Good Opportunities</label>
+                <input type="checkbox" name="goodOpportunities" id="field_goodOpportunities"
+                          ng-model="vm.intentionsAndPlans.goodOpportunities"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_preventLapses">Prevent Lapses</label>
+                <input type="checkbox" name="preventLapses" id="field_preventLapses"
+                          ng-model="vm.intentionsAndPlans.preventLapses"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_exerciseSeveralTimesPerWeek">Exercise Several Times Per Week</label>
+                <input type="checkbox" name="exerciseSeveralTimesPerWeek" id="field_exerciseSeveralTimesPerWeek"
+                          ng-model="vm.intentionsAndPlans.exerciseSeveralTimesPerWeek"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_workUpSweat">Work Up Sweat</label>
+                <input type="checkbox" name="workUpSweat" id="field_workUpSweat"
+                          ng-model="vm.intentionsAndPlans.workUpSweat"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_exerciseRegularly">Exercise Regularly</label>
+                <input type="checkbox" name="exerciseRegularly" id="field_exerciseRegularly"
+                          ng-model="vm.intentionsAndPlans.exerciseRegularly"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_minimumPhysicalActivity">Minimum Physical Activity</label>
+                <input type="checkbox" name="minimumPhysicalActivity" id="field_minimumPhysicalActivity"
+                          ng-model="vm.intentionsAndPlans.minimumPhysicalActivity"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_leisureTimeActivity">Leisure Time Activity</label>
+                <input type="checkbox" name="leisureTimeActivity" id="field_leisureTimeActivity"
+                          ng-model="vm.intentionsAndPlans.leisureTimeActivity"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_exerciseDuringRehabilitation">Exercise During Rehabilitation</label>
+                <input type="checkbox" name="exerciseDuringRehabilitation" id="field_exerciseDuringRehabilitation"
+                          ng-model="vm.intentionsAndPlans.exerciseDuringRehabilitation"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_phase">Phase</label>
+            <select class="form-control" name="phase" ng-model="vm.intentionsAndPlans.phase" id="field_phase" required>
+                <option value="INITIAL">INITIAL</option>
+                <option value="FINAL">FINAL</option>
+            </select>
+            <div ng-show="editForm.phase.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.phase.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_date">Date</label>
+                <div class="input-group">
+                    <input id="field_date" type="text" class="form-control" name="date" datetime-picker="{{dateformat}}" ng-model="vm.intentionsAndPlans.date" is-open="vm.datePickerOpenStatus.date"
+                    required/>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('date')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+            <div ng-show="editForm.date.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.date.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.date.$error.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" ng-model="vm.intentionsAndPlans.user" ng-options="user as user.login for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
