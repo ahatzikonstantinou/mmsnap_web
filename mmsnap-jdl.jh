@@ -1,5 +1,5 @@
 enum AssessmentPhase {
-    INITIAL, FINAL
+    INITIAL, FINAL, IN_PROGRESS
 }
 
 entity HealthRisk {
@@ -30,7 +30,7 @@ entity IntentionsAndPlans {
     pastWeekExercise Boolean,
     exerciseWhere Boolean,
     exerciseHow Boolean,
-    exerciseHowOfter Boolean,
+    exerciseHowOften Boolean,
     exerciseWithWhom Boolean,
     plansInterfere Boolean,
     setbacksCope Boolean,

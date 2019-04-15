@@ -2,6 +2,7 @@ package mmsnap.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 
+import io.github.jhipster.web.util.ResponseUtil;
 import mmsnap.domain.User;
 import mmsnap.repository.UserRepository;
 import mmsnap.security.SecurityUtils;
@@ -16,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -169,7 +171,7 @@ public class AccountResource {
     */
     @PostMapping(path = "/account/reset-password/finish")
     @Timed
-    public void finishPasswordReset(@RequestBody KeyAndPasswordVM keyAndPassword) {
+    public ResponseEntity<UserDTO> finishPasswordReset( @RequestBody KeyAndPasswordVM keyAndPassword ) {
         if (!checkPasswordLength(keyAndPassword.getNewPassword())) {
             throw new InvalidPasswordException();
         }
@@ -179,6 +181,10 @@ public class AccountResource {
         if (!user.isPresent()) {
             throw new InternalServerErrorException("No user was found for this reset key");
         }
+
+        return ResponseUtil.wrapOrNotFound(
+            userService.getUserWithAuthoritiesByLogin( user.get().getLogin() )
+                       .map(UserDTO::new));
     }
 
     private static boolean checkPasswordLength(String password) {
