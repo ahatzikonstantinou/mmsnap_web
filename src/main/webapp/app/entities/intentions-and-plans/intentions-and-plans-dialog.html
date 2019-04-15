@@ -34,9 +34,9 @@
                           ng-model="vm.intentionsAndPlans.exerciseHow"/>
         </div>
         <div class="form-group">
-            <label class="control-label" for="field_exerciseHowOfter">Exercise How Ofter</label>
-                <input type="checkbox" name="exerciseHowOfter" id="field_exerciseHowOfter"
-                          ng-model="vm.intentionsAndPlans.exerciseHowOfter"/>
+            <label class="control-label" for="field_exerciseHowOften">Exercise How Often</label>
+                <input type="checkbox" name="exerciseHowOften" id="field_exerciseHowOften"
+                          ng-model="vm.intentionsAndPlans.exerciseHowOften"/>
         </div>
         <div class="form-group">
             <label class="control-label" for="field_exerciseWithWhom">Exercise With Whom</label>
@@ -103,6 +103,7 @@
             <select class="form-control" name="phase" ng-model="vm.intentionsAndPlans.phase" id="field_phase" required>
                 <option value="INITIAL">INITIAL</option>
                 <option value="FINAL">FINAL</option>
+                <option value="IN_PROGRESS">IN_PROGRESS</option>
             </select>
             <div ng-show="editForm.phase.$invalid">
                 <p class="help-block"

@@ -99,7 +99,7 @@
                                 pastWeekExercise: null,
                                 exerciseWhere: null,
                                 exerciseHow: null,
-                                exerciseHowOfter: null,
+                                exerciseHowOften: null,
                                 exerciseWithWhom: null,
                                 plansInterfere: null,
                                 setbacksCope: null,

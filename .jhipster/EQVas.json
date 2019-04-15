@@ -19,7 +19,7 @@
         {
             "fieldName": "phase",
             "fieldType": "AssessmentPhase",
-            "fieldValues": "INITIAL,FINAL"
+            "fieldValues": "INITIAL,FINAL,IN_PROGRESS"
         },
         {
             "fieldName": "date",

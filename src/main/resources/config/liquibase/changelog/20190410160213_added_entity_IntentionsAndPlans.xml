@@ -38,7 +38,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="exercise_how_ofter" type="bit">
+            <column name="exercise_how_often" type="bit">
                 <constraints nullable="true" />
             </column>
 

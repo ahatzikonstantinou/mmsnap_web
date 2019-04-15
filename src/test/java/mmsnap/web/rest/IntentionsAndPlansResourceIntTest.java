@@ -52,8 +52,8 @@ public class IntentionsAndPlansResourceIntTest {
     private static final Boolean DEFAULT_EXERCISE_HOW = false;
     private static final Boolean UPDATED_EXERCISE_HOW = true;
 
-    private static final Boolean DEFAULT_EXERCISE_HOW_OFTER = false;
-    private static final Boolean UPDATED_EXERCISE_HOW_OFTER = true;
+    private static final Boolean DEFAULT_EXERCISE_HOW_OFTEN = false;
+    private static final Boolean UPDATED_EXERCISE_HOW_OFTEN = true;
 
     private static final Boolean DEFAULT_EXERCISE_WITH_WHOM = false;
     private static final Boolean UPDATED_EXERCISE_WITH_WHOM = true;
@@ -138,7 +138,7 @@ public class IntentionsAndPlansResourceIntTest {
             .pastWeekExercise(DEFAULT_PAST_WEEK_EXERCISE)
             .exerciseWhere(DEFAULT_EXERCISE_WHERE)
             .exerciseHow(DEFAULT_EXERCISE_HOW)
-            .exerciseHowOfter(DEFAULT_EXERCISE_HOW_OFTER)
+            .exerciseHowOften(DEFAULT_EXERCISE_HOW_OFTEN)
             .exerciseWithWhom(DEFAULT_EXERCISE_WITH_WHOM)
             .plansInterfere(DEFAULT_PLANS_INTERFERE)
             .setbacksCope(DEFAULT_SETBACKS_COPE)
@@ -180,7 +180,7 @@ public class IntentionsAndPlansResourceIntTest {
         assertThat(testIntentionsAndPlans.isPastWeekExercise()).isEqualTo(DEFAULT_PAST_WEEK_EXERCISE);
         assertThat(testIntentionsAndPlans.isExerciseWhere()).isEqualTo(DEFAULT_EXERCISE_WHERE);
         assertThat(testIntentionsAndPlans.isExerciseHow()).isEqualTo(DEFAULT_EXERCISE_HOW);
-        assertThat(testIntentionsAndPlans.isExerciseHowOfter()).isEqualTo(DEFAULT_EXERCISE_HOW_OFTER);
+        assertThat(testIntentionsAndPlans.isExerciseHowOften()).isEqualTo(DEFAULT_EXERCISE_HOW_OFTEN);
         assertThat(testIntentionsAndPlans.isExerciseWithWhom()).isEqualTo(DEFAULT_EXERCISE_WITH_WHOM);
         assertThat(testIntentionsAndPlans.isPlansInterfere()).isEqualTo(DEFAULT_PLANS_INTERFERE);
         assertThat(testIntentionsAndPlans.isSetbacksCope()).isEqualTo(DEFAULT_SETBACKS_COPE);
@@ -267,7 +267,7 @@ public class IntentionsAndPlansResourceIntTest {
             .andExpect(jsonPath("$.[*].pastWeekExercise").value(hasItem(DEFAULT_PAST_WEEK_EXERCISE.booleanValue())))
             .andExpect(jsonPath("$.[*].exerciseWhere").value(hasItem(DEFAULT_EXERCISE_WHERE.booleanValue())))
             .andExpect(jsonPath("$.[*].exerciseHow").value(hasItem(DEFAULT_EXERCISE_HOW.booleanValue())))
-            .andExpect(jsonPath("$.[*].exerciseHowOfter").value(hasItem(DEFAULT_EXERCISE_HOW_OFTER.booleanValue())))
+            .andExpect(jsonPath("$.[*].exerciseHowOften").value(hasItem(DEFAULT_EXERCISE_HOW_OFTEN.booleanValue())))
             .andExpect(jsonPath("$.[*].exerciseWithWhom").value(hasItem(DEFAULT_EXERCISE_WITH_WHOM.booleanValue())))
             .andExpect(jsonPath("$.[*].plansInterfere").value(hasItem(DEFAULT_PLANS_INTERFERE.booleanValue())))
             .andExpect(jsonPath("$.[*].setbacksCope").value(hasItem(DEFAULT_SETBACKS_COPE.booleanValue())))
@@ -299,7 +299,7 @@ public class IntentionsAndPlansResourceIntTest {
             .andExpect(jsonPath("$.pastWeekExercise").value(DEFAULT_PAST_WEEK_EXERCISE.booleanValue()))
             .andExpect(jsonPath("$.exerciseWhere").value(DEFAULT_EXERCISE_WHERE.booleanValue()))
             .andExpect(jsonPath("$.exerciseHow").value(DEFAULT_EXERCISE_HOW.booleanValue()))
-            .andExpect(jsonPath("$.exerciseHowOfter").value(DEFAULT_EXERCISE_HOW_OFTER.booleanValue()))
+            .andExpect(jsonPath("$.exerciseHowOften").value(DEFAULT_EXERCISE_HOW_OFTEN.booleanValue()))
             .andExpect(jsonPath("$.exerciseWithWhom").value(DEFAULT_EXERCISE_WITH_WHOM.booleanValue()))
             .andExpect(jsonPath("$.plansInterfere").value(DEFAULT_PLANS_INTERFERE.booleanValue()))
             .andExpect(jsonPath("$.setbacksCope").value(DEFAULT_SETBACKS_COPE.booleanValue()))
@@ -338,7 +338,7 @@ public class IntentionsAndPlansResourceIntTest {
             .pastWeekExercise(UPDATED_PAST_WEEK_EXERCISE)
             .exerciseWhere(UPDATED_EXERCISE_WHERE)
             .exerciseHow(UPDATED_EXERCISE_HOW)
-            .exerciseHowOfter(UPDATED_EXERCISE_HOW_OFTER)
+            .exerciseHowOften(UPDATED_EXERCISE_HOW_OFTEN)
             .exerciseWithWhom(UPDATED_EXERCISE_WITH_WHOM)
             .plansInterfere(UPDATED_PLANS_INTERFERE)
             .setbacksCope(UPDATED_SETBACKS_COPE)
@@ -367,7 +367,7 @@ public class IntentionsAndPlansResourceIntTest {
         assertThat(testIntentionsAndPlans.isPastWeekExercise()).isEqualTo(UPDATED_PAST_WEEK_EXERCISE);
         assertThat(testIntentionsAndPlans.isExerciseWhere()).isEqualTo(UPDATED_EXERCISE_WHERE);
         assertThat(testIntentionsAndPlans.isExerciseHow()).isEqualTo(UPDATED_EXERCISE_HOW);
-        assertThat(testIntentionsAndPlans.isExerciseHowOfter()).isEqualTo(UPDATED_EXERCISE_HOW_OFTER);
+        assertThat(testIntentionsAndPlans.isExerciseHowOften()).isEqualTo(UPDATED_EXERCISE_HOW_OFTEN);
         assertThat(testIntentionsAndPlans.isExerciseWithWhom()).isEqualTo(UPDATED_EXERCISE_WITH_WHOM);
         assertThat(testIntentionsAndPlans.isPlansInterfere()).isEqualTo(UPDATED_PLANS_INTERFERE);
         assertThat(testIntentionsAndPlans.isSetbacksCope()).isEqualTo(UPDATED_SETBACKS_COPE);

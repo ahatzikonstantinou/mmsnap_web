@@ -26,7 +26,7 @@
             "fieldType": "Boolean"
         },
         {
-            "fieldName": "exerciseHowOfter",
+            "fieldName": "exerciseHowOften",
             "fieldType": "Boolean"
         },
         {
@@ -80,7 +80,7 @@
         {
             "fieldName": "phase",
             "fieldType": "AssessmentPhase",
-            "fieldValues": "INITIAL,FINAL",
+            "fieldValues": "INITIAL,FINAL,IN_PROGRESS",
             "fieldValidateRules": [
                 "required"
             ]

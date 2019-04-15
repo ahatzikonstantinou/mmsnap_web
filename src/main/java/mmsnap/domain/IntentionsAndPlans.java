@@ -34,8 +34,8 @@ public class IntentionsAndPlans implements Serializable {
     @Column(name = "exercise_how")
     private Boolean exerciseHow;
 
-    @Column(name = "exercise_how_ofter")
-    private Boolean exerciseHowOfter;
+    @Column(name = "exercise_how_often")
+    private Boolean exerciseHowOften;
 
     @Column(name = "exercise_with_whom")
     private Boolean exerciseWithWhom;
@@ -146,17 +146,17 @@ public class IntentionsAndPlans implements Serializable {
         this.exerciseHow = exerciseHow;
     }
 
-    public Boolean isExerciseHowOfter() {
-        return exerciseHowOfter;
+    public Boolean isExerciseHowOften() {
+        return exerciseHowOften;
     }
 
-    public IntentionsAndPlans exerciseHowOfter(Boolean exerciseHowOfter) {
-        this.exerciseHowOfter = exerciseHowOfter;
+    public IntentionsAndPlans exerciseHowOften(Boolean exerciseHowOften) {
+        this.exerciseHowOften = exerciseHowOften;
         return this;
     }
 
-    public void setExerciseHowOfter(Boolean exerciseHowOfter) {
-        this.exerciseHowOfter = exerciseHowOfter;
+    public void setExerciseHowOften(Boolean exerciseHowOften) {
+        this.exerciseHowOften = exerciseHowOften;
     }
 
     public Boolean isExerciseWithWhom() {
@@ -383,7 +383,7 @@ public class IntentionsAndPlans implements Serializable {
             ", pastWeekExercise='" + isPastWeekExercise() + "'" +
             ", exerciseWhere='" + isExerciseWhere() + "'" +
             ", exerciseHow='" + isExerciseHow() + "'" +
-            ", exerciseHowOfter='" + isExerciseHowOfter() + "'" +
+            ", exerciseHowOften='" + isExerciseHowOften() + "'" +
             ", exerciseWithWhom='" + isExerciseWithWhom() + "'" +
             ", plansInterfere='" + isPlansInterfere() + "'" +
             ", setbacksCope='" + isSetbacksCope() + "'" +
