@@ -4,6 +4,7 @@ import mmsnap.MmsnapWebApp;
 
 import mmsnap.domain.SelfEfficacy;
 import mmsnap.repository.SelfEfficacyRepository;
+import mmsnap.repository.UserRepository;
 import mmsnap.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -59,6 +60,9 @@ public class SelfEfficacyResourceIntTest {
     private SelfEfficacyRepository selfEfficacyRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -77,7 +81,7 @@ public class SelfEfficacyResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final SelfEfficacyResource selfEfficacyResource = new SelfEfficacyResource(selfEfficacyRepository);
+        final SelfEfficacyResource selfEfficacyResource = new SelfEfficacyResource( selfEfficacyRepository, userRepository );
         this.restSelfEfficacyMockMvc = MockMvcBuilders.standaloneSetup(selfEfficacyResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

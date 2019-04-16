@@ -4,6 +4,9 @@ import com.codahale.metrics.annotation.Timed;
 import mmsnap.domain.HealthRisk;
 
 import mmsnap.repository.HealthRiskRepository;
+import mmsnap.repository.UserRepository;
+import mmsnap.security.AuthoritiesConstants;
+import mmsnap.security.SecurityUtils;
 import mmsnap.web.rest.errors.BadRequestAlertException;
 import mmsnap.web.rest.util.HeaderUtil;
 import mmsnap.web.rest.util.PaginationUtil;
@@ -16,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -37,9 +41,11 @@ public class HealthRiskResource {
     private static final String ENTITY_NAME = "healthRisk";
 
     private final HealthRiskRepository healthRiskRepository;
+    private final UserRepository       userRepository;
 
-    public HealthRiskResource(HealthRiskRepository healthRiskRepository) {
+    public HealthRiskResource( HealthRiskRepository healthRiskRepository, UserRepository userRepository ) {
         this.healthRiskRepository = healthRiskRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -55,6 +61,10 @@ public class HealthRiskResource {
         log.debug("REST request to save HealthRisk : {}", healthRisk);
         if (healthRisk.getId() != null) {
             throw new BadRequestAlertException("A new healthRisk cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        if( !SecurityUtils.isCurrentUserInRole( AuthoritiesConstants.ADMIN ) )
+        {
+            healthRisk.setUser( userRepository.findOneByLogin( SecurityUtils.getCurrentUserLogin() ).get() );
         }
         HealthRisk result = healthRiskRepository.save(healthRisk);
         return ResponseEntity.created(new URI("/api/health-risks/" + result.getId()))
@@ -73,6 +83,7 @@ public class HealthRiskResource {
      */
     @PutMapping("/health-risks")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<HealthRisk> updateHealthRisk(@Valid @RequestBody HealthRisk healthRisk) throws URISyntaxException {
         log.debug("REST request to update HealthRisk : {}", healthRisk);
         if (healthRisk.getId() == null) {
@@ -94,7 +105,7 @@ public class HealthRiskResource {
     @Timed
     public ResponseEntity<List<HealthRisk>> getAllHealthRisks(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of HealthRisks");
-        Page<HealthRisk> page = healthRiskRepository.findAll(pageable);
+        Page<HealthRisk> page = SecurityUtils.isCurrentUserInRole( AuthoritiesConstants.ADMIN ) ? healthRiskRepository.findAll( pageable ) : healthRiskRepository.findByUserIsCurrentUser(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/health-risks");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -110,6 +121,12 @@ public class HealthRiskResource {
     public ResponseEntity<HealthRisk> getHealthRisk(@PathVariable Long id) {
         log.debug("REST request to get HealthRisk : {}", id);
         HealthRisk healthRisk = healthRiskRepository.findOne(id);
+        if( !SecurityUtils.isCurrentUserInRole( AuthoritiesConstants.ADMIN ) &&
+            !healthRisk.getUser().getLogin().contentEquals( SecurityUtils.getCurrentUserLogin() )
+            )
+        {
+            healthRisk = null;
+        }
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(healthRisk));
     }
 
@@ -121,6 +138,7 @@ public class HealthRiskResource {
      */
     @DeleteMapping("/health-risks/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteHealthRisk(@PathVariable Long id) {
         log.debug("REST request to delete HealthRisk : {}", id);
         healthRiskRepository.delete(id);

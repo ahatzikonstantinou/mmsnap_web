@@ -1,6 +1,8 @@
 package mmsnap.repository;
 
 import mmsnap.domain.WeeklyEvaluation;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
@@ -16,4 +18,6 @@ public interface WeeklyEvaluationRepository extends JpaRepository<WeeklyEvaluati
     @Query("select weekly_evaluation from WeeklyEvaluation weekly_evaluation where weekly_evaluation.user.login = ?#{principal.username}")
     List<WeeklyEvaluation> findByUserIsCurrentUser();
 
+    @Query("select weekly_evaluation from WeeklyEvaluation weekly_evaluation where weekly_evaluation.user.login = ?#{principal.username}")
+    Page<WeeklyEvaluation> findByUserIsCurrentUser( Pageable pageable );
 }

@@ -3,6 +3,7 @@ package mmsnap.web.rest;
 import mmsnap.MmsnapWebApp;
 
 import mmsnap.domain.WeeklyEvaluation;
+import mmsnap.repository.UserRepository;
 import mmsnap.repository.WeeklyEvaluationRepository;
 import mmsnap.web.rest.errors.ExceptionTranslator;
 
@@ -64,6 +65,9 @@ public class WeeklyEvaluationResourceIntTest {
     private WeeklyEvaluationRepository weeklyEvaluationRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -82,7 +86,7 @@ public class WeeklyEvaluationResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final WeeklyEvaluationResource weeklyEvaluationResource = new WeeklyEvaluationResource(weeklyEvaluationRepository);
+        final WeeklyEvaluationResource weeklyEvaluationResource = new WeeklyEvaluationResource( weeklyEvaluationRepository, userRepository );
         this.restWeeklyEvaluationMockMvc = MockMvcBuilders.standaloneSetup(weeklyEvaluationResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

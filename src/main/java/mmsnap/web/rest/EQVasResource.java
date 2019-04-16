@@ -4,6 +4,9 @@ import com.codahale.metrics.annotation.Timed;
 import mmsnap.domain.EQVas;
 
 import mmsnap.repository.EQVasRepository;
+import mmsnap.repository.UserRepository;
+import mmsnap.security.AuthoritiesConstants;
+import mmsnap.security.SecurityUtils;
 import mmsnap.web.rest.errors.BadRequestAlertException;
 import mmsnap.web.rest.util.HeaderUtil;
 import mmsnap.web.rest.util.PaginationUtil;
@@ -16,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -37,9 +41,11 @@ public class EQVasResource {
     private static final String ENTITY_NAME = "eQVas";
 
     private final EQVasRepository eQVasRepository;
+    private final UserRepository  userRepository;
 
-    public EQVasResource(EQVasRepository eQVasRepository) {
+    public EQVasResource( EQVasRepository eQVasRepository, UserRepository userRepository ) {
         this.eQVasRepository = eQVasRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -55,6 +61,10 @@ public class EQVasResource {
         log.debug("REST request to save EQVas : {}", eQVas);
         if (eQVas.getId() != null) {
             throw new BadRequestAlertException("A new eQVas cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        if( !SecurityUtils.isCurrentUserInRole( AuthoritiesConstants.ADMIN ) )
+        {
+            eQVas.setUser( userRepository.findOneByLogin( SecurityUtils.getCurrentUserLogin() ).get() );
         }
         EQVas result = eQVasRepository.save(eQVas);
         return ResponseEntity.created(new URI("/api/e-q-vas/" + result.getId()))
@@ -73,6 +83,7 @@ public class EQVasResource {
      */
     @PutMapping("/e-q-vas")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<EQVas> updateEQVas(@Valid @RequestBody EQVas eQVas) throws URISyntaxException {
         log.debug("REST request to update EQVas : {}", eQVas);
         if (eQVas.getId() == null) {
@@ -94,7 +105,7 @@ public class EQVasResource {
     @Timed
     public ResponseEntity<List<EQVas>> getAllEQVas(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of EQVas");
-        Page<EQVas> page = eQVasRepository.findAll(pageable);
+        Page<EQVas> page = SecurityUtils.isCurrentUserInRole( AuthoritiesConstants.ADMIN ) ? eQVasRepository.findAll( pageable ) : eQVasRepository.findByUserIsCurrentUser(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/e-q-vas");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -110,6 +121,12 @@ public class EQVasResource {
     public ResponseEntity<EQVas> getEQVas(@PathVariable Long id) {
         log.debug("REST request to get EQVas : {}", id);
         EQVas eQVas = eQVasRepository.findOne(id);
+        if( !SecurityUtils.isCurrentUserInRole( AuthoritiesConstants.ADMIN ) &&
+            !eQVas.getUser().getLogin().contentEquals( SecurityUtils.getCurrentUserLogin() )
+            )
+        {
+            eQVas = null;
+        }
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(eQVas));
     }
 
@@ -121,6 +138,7 @@ public class EQVasResource {
      */
     @DeleteMapping("/e-q-vas/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteEQVas(@PathVariable Long id) {
         log.debug("REST request to delete EQVas : {}", id);
         eQVasRepository.delete(id);

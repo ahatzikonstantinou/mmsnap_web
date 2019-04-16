@@ -1,6 +1,8 @@
 package mmsnap.repository;
 
 import mmsnap.domain.IntentionsAndPlans;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
@@ -16,4 +18,6 @@ public interface IntentionsAndPlansRepository extends JpaRepository<IntentionsAn
     @Query("select intentions_and_plans from IntentionsAndPlans intentions_and_plans where intentions_and_plans.user.login = ?#{principal.username}")
     List<IntentionsAndPlans> findByUserIsCurrentUser();
 
+    @Query("select intentions_and_plans from IntentionsAndPlans intentions_and_plans where intentions_and_plans.user.login = ?#{principal.username}")
+    Page<IntentionsAndPlans> findByUserIsCurrentUser( Pageable pageable );
 }

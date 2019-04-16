@@ -4,6 +4,7 @@ import mmsnap.MmsnapWebApp;
 
 import mmsnap.domain.EQVas;
 import mmsnap.repository.EQVasRepository;
+import mmsnap.repository.UserRepository;
 import mmsnap.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -53,6 +54,9 @@ public class EQVasResourceIntTest {
     private EQVasRepository eQVasRepository;
 
     @Autowired
+    private UserRepository  userRepository;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -71,7 +75,7 @@ public class EQVasResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final EQVasResource eQVasResource = new EQVasResource(eQVasRepository);
+        final EQVasResource eQVasResource = new EQVasResource( eQVasRepository, userRepository );
         this.restEQVasMockMvc = MockMvcBuilders.standaloneSetup(eQVasResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

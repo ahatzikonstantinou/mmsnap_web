@@ -1,6 +1,8 @@
 package mmsnap.repository;
 
 import mmsnap.domain.SelfRatedHealth;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
@@ -16,4 +18,6 @@ public interface SelfRatedHealthRepository extends JpaRepository<SelfRatedHealth
     @Query("select self_rated_health from SelfRatedHealth self_rated_health where self_rated_health.user.login = ?#{principal.username}")
     List<SelfRatedHealth> findByUserIsCurrentUser();
 
+    @Query("select self_rated_health from SelfRatedHealth self_rated_health where self_rated_health.user.login = ?#{principal.username}")
+    Page<SelfRatedHealth> findByUserIsCurrentUser( Pageable pageable );
 }

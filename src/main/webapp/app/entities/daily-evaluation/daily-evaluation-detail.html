@@ -60,7 +60,7 @@
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
     </button>
 
-    <button type="button" ui-sref="daily-evaluation-detail.edit({id:vm.dailyEvaluation.id})" class="btn btn-primary">
+    <button type="button" ui-sref="daily-evaluation-detail.edit({id:vm.dailyEvaluation.id})" class="btn btn-primary" has-authority="ROLE_ADMIN">
         <span class="glyphicon glyphicon-pencil"></span>
         <span class="hidden-sm-down"> Edit</span>
     </button>

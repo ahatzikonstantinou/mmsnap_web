@@ -4,6 +4,9 @@ import com.codahale.metrics.annotation.Timed;
 import mmsnap.domain.SelfRatedHealth;
 
 import mmsnap.repository.SelfRatedHealthRepository;
+import mmsnap.repository.UserRepository;
+import mmsnap.security.AuthoritiesConstants;
+import mmsnap.security.SecurityUtils;
 import mmsnap.web.rest.errors.BadRequestAlertException;
 import mmsnap.web.rest.util.HeaderUtil;
 import mmsnap.web.rest.util.PaginationUtil;
@@ -16,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -37,9 +41,11 @@ public class SelfRatedHealthResource {
     private static final String ENTITY_NAME = "selfRatedHealth";
 
     private final SelfRatedHealthRepository selfRatedHealthRepository;
+    private final UserRepository            userRepository;
 
-    public SelfRatedHealthResource(SelfRatedHealthRepository selfRatedHealthRepository) {
+    public SelfRatedHealthResource( SelfRatedHealthRepository selfRatedHealthRepository, UserRepository userRepository ) {
         this.selfRatedHealthRepository = selfRatedHealthRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -55,6 +61,10 @@ public class SelfRatedHealthResource {
         log.debug("REST request to save SelfRatedHealth : {}", selfRatedHealth);
         if (selfRatedHealth.getId() != null) {
             throw new BadRequestAlertException("A new selfRatedHealth cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        if( !SecurityUtils.isCurrentUserInRole( AuthoritiesConstants.ADMIN ) )
+        {
+            selfRatedHealth.setUser( userRepository.findOneByLogin( SecurityUtils.getCurrentUserLogin() ).get() );
         }
         SelfRatedHealth result = selfRatedHealthRepository.save(selfRatedHealth);
         return ResponseEntity.created(new URI("/api/self-rated-healths/" + result.getId()))
@@ -73,6 +83,7 @@ public class SelfRatedHealthResource {
      */
     @PutMapping("/self-rated-healths")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<SelfRatedHealth> updateSelfRatedHealth(@Valid @RequestBody SelfRatedHealth selfRatedHealth) throws URISyntaxException {
         log.debug("REST request to update SelfRatedHealth : {}", selfRatedHealth);
         if (selfRatedHealth.getId() == null) {
@@ -94,7 +105,7 @@ public class SelfRatedHealthResource {
     @Timed
     public ResponseEntity<List<SelfRatedHealth>> getAllSelfRatedHealths(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of SelfRatedHealths");
-        Page<SelfRatedHealth> page = selfRatedHealthRepository.findAll(pageable);
+        Page<SelfRatedHealth> page = SecurityUtils.isCurrentUserInRole( AuthoritiesConstants.ADMIN ) ? selfRatedHealthRepository.findAll( pageable ) : selfRatedHealthRepository.findByUserIsCurrentUser(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/self-rated-healths");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -110,6 +121,12 @@ public class SelfRatedHealthResource {
     public ResponseEntity<SelfRatedHealth> getSelfRatedHealth(@PathVariable Long id) {
         log.debug("REST request to get SelfRatedHealth : {}", id);
         SelfRatedHealth selfRatedHealth = selfRatedHealthRepository.findOne(id);
+        if( !SecurityUtils.isCurrentUserInRole( AuthoritiesConstants.ADMIN ) &&
+            !selfRatedHealth.getUser().getLogin().contentEquals( SecurityUtils.getCurrentUserLogin() )
+            )
+        {
+            selfRatedHealth = null;
+        }
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(selfRatedHealth));
     }
 
@@ -121,6 +138,7 @@ public class SelfRatedHealthResource {
      */
     @DeleteMapping("/self-rated-healths/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteSelfRatedHealth(@PathVariable Long id) {
         log.debug("REST request to delete SelfRatedHealth : {}", id);
         selfRatedHealthRepository.delete(id);

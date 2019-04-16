@@ -4,6 +4,7 @@ import mmsnap.MmsnapWebApp;
 
 import mmsnap.domain.DailyEvaluation;
 import mmsnap.repository.DailyEvaluationRepository;
+import mmsnap.repository.UserRepository;
 import mmsnap.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -77,6 +78,9 @@ public class DailyEvaluationResourceIntTest {
     private DailyEvaluationRepository dailyEvaluationRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -95,7 +99,7 @@ public class DailyEvaluationResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final DailyEvaluationResource dailyEvaluationResource = new DailyEvaluationResource(dailyEvaluationRepository);
+        final DailyEvaluationResource dailyEvaluationResource = new DailyEvaluationResource( dailyEvaluationRepository, userRepository );
         this.restDailyEvaluationMockMvc = MockMvcBuilders.standaloneSetup(dailyEvaluationResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

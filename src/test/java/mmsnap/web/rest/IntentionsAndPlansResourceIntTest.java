@@ -4,6 +4,7 @@ import mmsnap.MmsnapWebApp;
 
 import mmsnap.domain.IntentionsAndPlans;
 import mmsnap.repository.IntentionsAndPlansRepository;
+import mmsnap.repository.UserRepository;
 import mmsnap.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -101,6 +102,9 @@ public class IntentionsAndPlansResourceIntTest {
     private IntentionsAndPlansRepository intentionsAndPlansRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -119,7 +123,7 @@ public class IntentionsAndPlansResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final IntentionsAndPlansResource intentionsAndPlansResource = new IntentionsAndPlansResource(intentionsAndPlansRepository);
+        final IntentionsAndPlansResource intentionsAndPlansResource = new IntentionsAndPlansResource( intentionsAndPlansRepository, userRepository );
         this.restIntentionsAndPlansMockMvc = MockMvcBuilders.standaloneSetup(intentionsAndPlansResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

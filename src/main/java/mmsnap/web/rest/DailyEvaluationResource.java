@@ -4,6 +4,9 @@ import com.codahale.metrics.annotation.Timed;
 import mmsnap.domain.DailyEvaluation;
 
 import mmsnap.repository.DailyEvaluationRepository;
+import mmsnap.repository.UserRepository;
+import mmsnap.security.AuthoritiesConstants;
+import mmsnap.security.SecurityUtils;
 import mmsnap.web.rest.errors.BadRequestAlertException;
 import mmsnap.web.rest.util.HeaderUtil;
 import mmsnap.web.rest.util.PaginationUtil;
@@ -16,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -37,9 +41,11 @@ public class DailyEvaluationResource {
     private static final String ENTITY_NAME = "dailyEvaluation";
 
     private final DailyEvaluationRepository dailyEvaluationRepository;
+    private final UserRepository            userRepository;
 
-    public DailyEvaluationResource(DailyEvaluationRepository dailyEvaluationRepository) {
+    public DailyEvaluationResource( DailyEvaluationRepository dailyEvaluationRepository, UserRepository userRepository ) {
         this.dailyEvaluationRepository = dailyEvaluationRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -55,6 +61,10 @@ public class DailyEvaluationResource {
         log.debug("REST request to save DailyEvaluation : {}", dailyEvaluation);
         if (dailyEvaluation.getId() != null) {
             throw new BadRequestAlertException("A new dailyEvaluation cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        if( !SecurityUtils.isCurrentUserInRole( AuthoritiesConstants.ADMIN ) )
+        {
+            dailyEvaluation.setUser( userRepository.findOneByLogin( SecurityUtils.getCurrentUserLogin() ).get() );
         }
         DailyEvaluation result = dailyEvaluationRepository.save(dailyEvaluation);
         return ResponseEntity.created(new URI("/api/daily-evaluations/" + result.getId()))
@@ -73,6 +83,7 @@ public class DailyEvaluationResource {
      */
     @PutMapping("/daily-evaluations")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<DailyEvaluation> updateDailyEvaluation(@Valid @RequestBody DailyEvaluation dailyEvaluation) throws URISyntaxException {
         log.debug("REST request to update DailyEvaluation : {}", dailyEvaluation);
         if (dailyEvaluation.getId() == null) {
@@ -94,7 +105,7 @@ public class DailyEvaluationResource {
     @Timed
     public ResponseEntity<List<DailyEvaluation>> getAllDailyEvaluations(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of DailyEvaluations");
-        Page<DailyEvaluation> page = dailyEvaluationRepository.findAll(pageable);
+        Page<DailyEvaluation> page = SecurityUtils.isCurrentUserInRole( AuthoritiesConstants.ADMIN ) ? dailyEvaluationRepository.findAll( pageable ) : dailyEvaluationRepository.findByUserIsCurrentUser(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/daily-evaluations");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -110,7 +121,12 @@ public class DailyEvaluationResource {
     public ResponseEntity<DailyEvaluation> getDailyEvaluation(@PathVariable Long id) {
         log.debug("REST request to get DailyEvaluation : {}", id);
         DailyEvaluation dailyEvaluation = dailyEvaluationRepository.findOne(id);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(dailyEvaluation));
+        if( !SecurityUtils.isCurrentUserInRole( AuthoritiesConstants.ADMIN ) &&
+            !dailyEvaluation.getUser().getLogin().contentEquals( SecurityUtils.getCurrentUserLogin() )
+            )
+        {
+            dailyEvaluation = null;
+        }return ResponseUtil.wrapOrNotFound(Optional.ofNullable(dailyEvaluation));
     }
 
     /**
@@ -121,6 +137,7 @@ public class DailyEvaluationResource {
      */
     @DeleteMapping("/daily-evaluations/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteDailyEvaluation(@PathVariable Long id) {
         log.debug("REST request to delete DailyEvaluation : {}", id);
         dailyEvaluationRepository.delete(id);

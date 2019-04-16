@@ -1,7 +1,7 @@
 <div>
     <h2>Health Risks</h2>
     <jhi-alert></jhi-alert>
-    <div class="container-fluid">
+    <div class="container-fluid" has-authority="ROLE_ADMIN">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="health-risk.new" >
@@ -49,13 +49,13 @@
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-sm-down"></span>
                             </button>
-                            <button type="submit"
+                            <button type="submit" has-authority="ROLE_ADMIN"
                                     ui-sref="health-risk.edit({id:healthRisk.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-sm-down"></span>
                             </button>
-                            <button type="submit"
+                            <button type="submit" has-authority="ROLE_ADMIN"
                                     ui-sref="health-risk.delete({id:healthRisk.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>

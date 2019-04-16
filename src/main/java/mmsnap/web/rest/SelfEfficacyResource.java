@@ -4,6 +4,9 @@ import com.codahale.metrics.annotation.Timed;
 import mmsnap.domain.SelfEfficacy;
 
 import mmsnap.repository.SelfEfficacyRepository;
+import mmsnap.repository.UserRepository;
+import mmsnap.security.AuthoritiesConstants;
+import mmsnap.security.SecurityUtils;
 import mmsnap.web.rest.errors.BadRequestAlertException;
 import mmsnap.web.rest.util.HeaderUtil;
 import mmsnap.web.rest.util.PaginationUtil;
@@ -16,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -37,9 +41,11 @@ public class SelfEfficacyResource {
     private static final String ENTITY_NAME = "selfEfficacy";
 
     private final SelfEfficacyRepository selfEfficacyRepository;
+    private final UserRepository         userRepository;
 
-    public SelfEfficacyResource(SelfEfficacyRepository selfEfficacyRepository) {
+    public SelfEfficacyResource( SelfEfficacyRepository selfEfficacyRepository, UserRepository userRepository ) {
         this.selfEfficacyRepository = selfEfficacyRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -55,6 +61,10 @@ public class SelfEfficacyResource {
         log.debug("REST request to save SelfEfficacy : {}", selfEfficacy);
         if (selfEfficacy.getId() != null) {
             throw new BadRequestAlertException("A new selfEfficacy cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        if( !SecurityUtils.isCurrentUserInRole( AuthoritiesConstants.ADMIN ) )
+        {
+            selfEfficacy.setUser( userRepository.findOneByLogin( SecurityUtils.getCurrentUserLogin() ).get() );
         }
         SelfEfficacy result = selfEfficacyRepository.save(selfEfficacy);
         return ResponseEntity.created(new URI("/api/self-efficacies/" + result.getId()))
@@ -73,6 +83,7 @@ public class SelfEfficacyResource {
      */
     @PutMapping("/self-efficacies")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<SelfEfficacy> updateSelfEfficacy(@Valid @RequestBody SelfEfficacy selfEfficacy) throws URISyntaxException {
         log.debug("REST request to update SelfEfficacy : {}", selfEfficacy);
         if (selfEfficacy.getId() == null) {
@@ -94,7 +105,7 @@ public class SelfEfficacyResource {
     @Timed
     public ResponseEntity<List<SelfEfficacy>> getAllSelfEfficacies(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of SelfEfficacies");
-        Page<SelfEfficacy> page = selfEfficacyRepository.findAll(pageable);
+        Page<SelfEfficacy> page = SecurityUtils.isCurrentUserInRole( AuthoritiesConstants.ADMIN ) ? selfEfficacyRepository.findAll( pageable ) : selfEfficacyRepository.findByUserIsCurrentUser(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/self-efficacies");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -110,6 +121,12 @@ public class SelfEfficacyResource {
     public ResponseEntity<SelfEfficacy> getSelfEfficacy(@PathVariable Long id) {
         log.debug("REST request to get SelfEfficacy : {}", id);
         SelfEfficacy selfEfficacy = selfEfficacyRepository.findOne(id);
+        if( !SecurityUtils.isCurrentUserInRole( AuthoritiesConstants.ADMIN ) &&
+            !selfEfficacy.getUser().getLogin().contentEquals( SecurityUtils.getCurrentUserLogin() )
+            )
+        {
+            selfEfficacy = null;
+        }
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(selfEfficacy));
     }
 
@@ -121,6 +138,7 @@ public class SelfEfficacyResource {
      */
     @DeleteMapping("/self-efficacies/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteSelfEfficacy(@PathVariable Long id) {
         log.debug("REST request to delete SelfEfficacy : {}", id);
         selfEfficacyRepository.delete(id);

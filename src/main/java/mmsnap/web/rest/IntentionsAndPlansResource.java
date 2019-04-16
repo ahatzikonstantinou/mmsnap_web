@@ -4,6 +4,9 @@ import com.codahale.metrics.annotation.Timed;
 import mmsnap.domain.IntentionsAndPlans;
 
 import mmsnap.repository.IntentionsAndPlansRepository;
+import mmsnap.repository.UserRepository;
+import mmsnap.security.AuthoritiesConstants;
+import mmsnap.security.SecurityUtils;
 import mmsnap.web.rest.errors.BadRequestAlertException;
 import mmsnap.web.rest.util.HeaderUtil;
 import mmsnap.web.rest.util.PaginationUtil;
@@ -16,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -37,9 +41,11 @@ public class IntentionsAndPlansResource {
     private static final String ENTITY_NAME = "intentionsAndPlans";
 
     private final IntentionsAndPlansRepository intentionsAndPlansRepository;
+    private final UserRepository               userRepository;
 
-    public IntentionsAndPlansResource(IntentionsAndPlansRepository intentionsAndPlansRepository) {
+    public IntentionsAndPlansResource( IntentionsAndPlansRepository intentionsAndPlansRepository, UserRepository userRepository ) {
         this.intentionsAndPlansRepository = intentionsAndPlansRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -55,6 +61,10 @@ public class IntentionsAndPlansResource {
         log.debug("REST request to save IntentionsAndPlans : {}", intentionsAndPlans);
         if (intentionsAndPlans.getId() != null) {
             throw new BadRequestAlertException("A new intentionsAndPlans cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        if( !SecurityUtils.isCurrentUserInRole( AuthoritiesConstants.ADMIN ) )
+        {
+            intentionsAndPlans.setUser( userRepository.findOneByLogin( SecurityUtils.getCurrentUserLogin() ).get() );
         }
         IntentionsAndPlans result = intentionsAndPlansRepository.save(intentionsAndPlans);
         return ResponseEntity.created(new URI("/api/intentions-and-plans/" + result.getId()))
@@ -73,6 +83,7 @@ public class IntentionsAndPlansResource {
      */
     @PutMapping("/intentions-and-plans")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<IntentionsAndPlans> updateIntentionsAndPlans(@Valid @RequestBody IntentionsAndPlans intentionsAndPlans) throws URISyntaxException {
         log.debug("REST request to update IntentionsAndPlans : {}", intentionsAndPlans);
         if (intentionsAndPlans.getId() == null) {
@@ -94,7 +105,7 @@ public class IntentionsAndPlansResource {
     @Timed
     public ResponseEntity<List<IntentionsAndPlans>> getAllIntentionsAndPlans(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of IntentionsAndPlans");
-        Page<IntentionsAndPlans> page = intentionsAndPlansRepository.findAll(pageable);
+        Page<IntentionsAndPlans> page = SecurityUtils.isCurrentUserInRole( AuthoritiesConstants.ADMIN ) ? intentionsAndPlansRepository.findAll( pageable ) : intentionsAndPlansRepository.findByUserIsCurrentUser(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/intentions-and-plans");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -110,6 +121,12 @@ public class IntentionsAndPlansResource {
     public ResponseEntity<IntentionsAndPlans> getIntentionsAndPlans(@PathVariable Long id) {
         log.debug("REST request to get IntentionsAndPlans : {}", id);
         IntentionsAndPlans intentionsAndPlans = intentionsAndPlansRepository.findOne(id);
+        if( !SecurityUtils.isCurrentUserInRole( AuthoritiesConstants.ADMIN ) &&
+            !intentionsAndPlans.getUser().getLogin().contentEquals( SecurityUtils.getCurrentUserLogin() )
+            )
+        {
+            intentionsAndPlans = null;
+        }
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(intentionsAndPlans));
     }
 
@@ -121,6 +138,7 @@ public class IntentionsAndPlansResource {
      */
     @DeleteMapping("/intentions-and-plans/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteIntentionsAndPlans(@PathVariable Long id) {
         log.debug("REST request to delete IntentionsAndPlans : {}", id);
         intentionsAndPlansRepository.delete(id);

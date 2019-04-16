@@ -4,6 +4,7 @@ import mmsnap.MmsnapWebApp;
 
 import mmsnap.domain.HealthRisk;
 import mmsnap.repository.HealthRiskRepository;
+import mmsnap.repository.UserRepository;
 import mmsnap.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -62,6 +63,9 @@ public class HealthRiskResourceIntTest {
     private HealthRiskRepository healthRiskRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -80,7 +84,7 @@ public class HealthRiskResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final HealthRiskResource healthRiskResource = new HealthRiskResource(healthRiskRepository);
+        final HealthRiskResource healthRiskResource = new HealthRiskResource( healthRiskRepository, userRepository );
         this.restHealthRiskMockMvc = MockMvcBuilders.standaloneSetup(healthRiskResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

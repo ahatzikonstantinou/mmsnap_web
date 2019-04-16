@@ -4,6 +4,7 @@ import mmsnap.MmsnapWebApp;
 
 import mmsnap.domain.SelfRatedHealth;
 import mmsnap.repository.SelfRatedHealthRepository;
+import mmsnap.repository.UserRepository;
 import mmsnap.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -30,25 +31,6 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import mmsnap.domain.enumeration.HealthScale;
-import mmsnap.domain.enumeration.HealthScale;
-import mmsnap.domain.enumeration.HealthScale;
-import mmsnap.domain.enumeration.HealthScale;
-import mmsnap.domain.enumeration.HealthScale;
-import mmsnap.domain.enumeration.HealthScale;
-import mmsnap.domain.enumeration.HealthScale;
-import mmsnap.domain.enumeration.HealthScale;
-import mmsnap.domain.enumeration.HealthScale;
-import mmsnap.domain.enumeration.HealthScale;
-import mmsnap.domain.enumeration.HealthScale;
-import mmsnap.domain.enumeration.HealthScale;
-import mmsnap.domain.enumeration.HealthScale;
-import mmsnap.domain.enumeration.HealthScale;
-import mmsnap.domain.enumeration.HealthScale;
-import mmsnap.domain.enumeration.HealthScale;
-import mmsnap.domain.enumeration.HealthScale;
-import mmsnap.domain.enumeration.HealthScale;
-import mmsnap.domain.enumeration.HealthScale;
 import mmsnap.domain.enumeration.HealthScale;
 import mmsnap.domain.enumeration.AssessmentPhase;
 /**
@@ -130,6 +112,9 @@ public class SelfRatedHealthResourceIntTest {
     private SelfRatedHealthRepository selfRatedHealthRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -148,7 +133,7 @@ public class SelfRatedHealthResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final SelfRatedHealthResource selfRatedHealthResource = new SelfRatedHealthResource(selfRatedHealthRepository);
+        final SelfRatedHealthResource selfRatedHealthResource = new SelfRatedHealthResource( selfRatedHealthRepository, userRepository );
         this.restSelfRatedHealthMockMvc = MockMvcBuilders.standaloneSetup(selfRatedHealthResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

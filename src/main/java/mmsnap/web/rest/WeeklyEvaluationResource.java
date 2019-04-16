@@ -3,7 +3,10 @@ package mmsnap.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import mmsnap.domain.WeeklyEvaluation;
 
+import mmsnap.repository.UserRepository;
 import mmsnap.repository.WeeklyEvaluationRepository;
+import mmsnap.security.AuthoritiesConstants;
+import mmsnap.security.SecurityUtils;
 import mmsnap.web.rest.errors.BadRequestAlertException;
 import mmsnap.web.rest.util.HeaderUtil;
 import mmsnap.web.rest.util.PaginationUtil;
@@ -16,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -37,9 +41,11 @@ public class WeeklyEvaluationResource {
     private static final String ENTITY_NAME = "weeklyEvaluation";
 
     private final WeeklyEvaluationRepository weeklyEvaluationRepository;
+    private final UserRepository             userRepository;
 
-    public WeeklyEvaluationResource(WeeklyEvaluationRepository weeklyEvaluationRepository) {
+    public WeeklyEvaluationResource( WeeklyEvaluationRepository weeklyEvaluationRepository, UserRepository userRepository ) {
         this.weeklyEvaluationRepository = weeklyEvaluationRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -55,6 +61,10 @@ public class WeeklyEvaluationResource {
         log.debug("REST request to save WeeklyEvaluation : {}", weeklyEvaluation);
         if (weeklyEvaluation.getId() != null) {
             throw new BadRequestAlertException("A new weeklyEvaluation cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        if( !SecurityUtils.isCurrentUserInRole( AuthoritiesConstants.ADMIN ) )
+        {
+            weeklyEvaluation.setUser( userRepository.findOneByLogin( SecurityUtils.getCurrentUserLogin() ).get() );
         }
         WeeklyEvaluation result = weeklyEvaluationRepository.save(weeklyEvaluation);
         return ResponseEntity.created(new URI("/api/weekly-evaluations/" + result.getId()))
@@ -73,6 +83,7 @@ public class WeeklyEvaluationResource {
      */
     @PutMapping("/weekly-evaluations")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<WeeklyEvaluation> updateWeeklyEvaluation(@Valid @RequestBody WeeklyEvaluation weeklyEvaluation) throws URISyntaxException {
         log.debug("REST request to update WeeklyEvaluation : {}", weeklyEvaluation);
         if (weeklyEvaluation.getId() == null) {
@@ -94,7 +105,7 @@ public class WeeklyEvaluationResource {
     @Timed
     public ResponseEntity<List<WeeklyEvaluation>> getAllWeeklyEvaluations(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of WeeklyEvaluations");
-        Page<WeeklyEvaluation> page = weeklyEvaluationRepository.findAll(pageable);
+        Page<WeeklyEvaluation> page = SecurityUtils.isCurrentUserInRole( AuthoritiesConstants.ADMIN ) ? weeklyEvaluationRepository.findAll( pageable ) : weeklyEvaluationRepository.findByUserIsCurrentUser(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/weekly-evaluations");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -110,6 +121,12 @@ public class WeeklyEvaluationResource {
     public ResponseEntity<WeeklyEvaluation> getWeeklyEvaluation(@PathVariable Long id) {
         log.debug("REST request to get WeeklyEvaluation : {}", id);
         WeeklyEvaluation weeklyEvaluation = weeklyEvaluationRepository.findOne(id);
+        if( !SecurityUtils.isCurrentUserInRole( AuthoritiesConstants.ADMIN ) &&
+            !weeklyEvaluation.getUser().getLogin().contentEquals( SecurityUtils.getCurrentUserLogin() )
+            )
+        {
+            weeklyEvaluation = null;
+        }
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(weeklyEvaluation));
     }
 
@@ -121,6 +138,7 @@ public class WeeklyEvaluationResource {
      */
     @DeleteMapping("/weekly-evaluations/{id}")
     @Timed
+    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<Void> deleteWeeklyEvaluation(@PathVariable Long id) {
         log.debug("REST request to delete WeeklyEvaluation : {}", id);
         weeklyEvaluationRepository.delete(id);
