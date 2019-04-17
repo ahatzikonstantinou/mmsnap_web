@@ -164,6 +164,10 @@ dependencies {
     compile ("org.springframework.boot:spring-boot-starter-web") {
         exclude module: 'spring-boot-starter-tomcat'
     }
+
+    compile "org.apache.poi:poi:3.16"
+    compile "org.apache.poi:poi-ooxml:3.16"
+
     compile "org.springframework.boot:spring-boot-starter-undertow"
     compile "org.springframework.boot:spring-boot-starter-thymeleaf"
     compile "org.zalando:problem-spring-web:${problem_spring_web_version}"

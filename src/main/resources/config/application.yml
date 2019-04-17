@@ -103,3 +103,4 @@ jhipster:
 # ===================================================================
 
 application:
+#    data-excel-template: data_template.xlsx #excel file with {xxx} placeholders for data fields

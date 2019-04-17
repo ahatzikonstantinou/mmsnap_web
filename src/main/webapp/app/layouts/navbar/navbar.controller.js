@@ -5,9 +5,9 @@
         .module('mmsnapWebApp')
         .controller('NavbarController', NavbarController);
 
-    NavbarController.$inject = ['$state', 'Auth', 'Principal', 'ProfileService', 'LoginService'];
+    NavbarController.$inject = ['$state', 'Auth', 'Principal', 'ProfileService', 'LoginService', '$http','AuthServerProvider'];
 
-    function NavbarController ($state, Auth, Principal, ProfileService, LoginService) {
+    function NavbarController ($state, Auth, Principal, ProfileService, LoginService, $http, AuthServerProvider) {
         var vm = this;
 
         vm.isNavbarCollapsed = true;
@@ -22,6 +22,7 @@
         vm.logout = logout;
         vm.toggleNavbar = toggleNavbar;
         vm.collapseNavbar = collapseNavbar;
+        vm.exportToExcel = exportToExcel;
         vm.$state = $state;
 
         function login() {
@@ -41,6 +42,44 @@
 
         function collapseNavbar() {
             vm.isNavbarCollapsed = true;
+        }
+
+        function s2ab(s) {
+          var buf = new ArrayBuffer(s.length);
+          var view = new Uint8Array(buf);
+          for (var i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+          return buf;
+        }
+
+        function exportToExcel( $event )
+        {
+//            console.log( 'AuthServerProvider.getToken ', AuthServerProvider.getToken() );
+
+            var req = {
+             method: 'GET',
+             url: 'api/_export',
+             headers: {
+               'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+               'Authorization': 'Bearer ' + AuthServerProvider.getToken()
+             },
+             responseType: 'arraybuffer'
+            }
+
+            $http(req).then(
+                function( response )
+                {
+//                    console.log( 'success, response: ', response );
+                    var filename = response.headers('Content-Disposition').split(";")[1].split("=")[1];
+                    console.log( 'filename: ', filename );
+                    var file = new File( [ response.data ], filename, { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' } );
+                    var fileURL = URL.createObjectURL( file );
+                    window.open( fileURL );
+                },
+                function()
+                {
+                    console.log( 'failure' );
+                }
+            );
         }
     }
 })();
