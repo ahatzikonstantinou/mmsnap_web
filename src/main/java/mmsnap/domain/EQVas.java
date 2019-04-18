@@ -26,6 +26,7 @@ public class EQVas implements Serializable {
     @Column(name = "score", nullable = false)
     private Integer score;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "phase")
     private AssessmentPhase phase;
@@ -35,6 +36,7 @@ public class EQVas implements Serializable {
     private Instant date;
 
     @ManyToOne
+    @NotNull
     private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

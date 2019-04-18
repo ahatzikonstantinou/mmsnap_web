@@ -34,6 +34,7 @@ public class HealthRisk implements Serializable {
     @Column(name = "alcohol")
     private Boolean alcohol;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "phase")
     private AssessmentPhase phase;
@@ -43,6 +44,7 @@ public class HealthRisk implements Serializable {
     private Instant date;
 
     @ManyToOne
+    @NotNull
     private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

@@ -7,13 +7,13 @@ entity HealthRisk {
     physicalActivity Boolean,
     diet Boolean,
     alcohol Boolean,
-    phase AssessmentPhase,
+    phase AssessmentPhase required,
     date Instant required
 }
 
 entity EQVas {
 	score Integer required,
-    phase AssessmentPhase,
+    phase AssessmentPhase required,
     date Instant required
 }
 
@@ -105,13 +105,13 @@ entity DailyEvaluation {
 }
 
 relationship ManyToOne {
-	HealthRisk{user(login)} to User,
-    EQVas{user(login)} to User,
-    SelfEfficacy{user(login)} to User,
-    IntentionsAndPlans{user(login)} to User,
-    SelfRatedHealth{user(login)} to User,
-    WeeklyEvaluation{user(login)} to User,
-    DailyEvaluation{user(login)} to User
+	HealthRisk{user(login)} to User required,
+    EQVas{user(login)} to User required,
+    SelfEfficacy{user(login)} to User required,
+    IntentionsAndPlans{user(login)} to User required,
+    SelfRatedHealth{user(login)} to User required,
+    WeeklyEvaluation{user(login)} to User required,
+    DailyEvaluation{user(login)} to User required
 }
 
 // Set pagination options

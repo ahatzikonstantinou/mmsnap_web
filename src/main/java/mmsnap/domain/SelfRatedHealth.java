@@ -134,6 +134,7 @@ public class SelfRatedHealth implements Serializable {
     private Instant date;
 
     @ManyToOne
+    @NotNull
     private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
