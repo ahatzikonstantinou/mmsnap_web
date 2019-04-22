@@ -27,6 +27,10 @@
 
         function save () {
             vm.isSaving = true;
+//            console.log( vm.selfEfficacy );
+            vm.selfEfficacy.healthierLifestyle = null != vm.selfEfficacy.healthierLifestyle ? vm.selfEfficacy.healthierLifestyle : false;
+            vm.selfEfficacy.manageMultimorbidity = null != vm.selfEfficacy.manageMultimorbidity ? vm.selfEfficacy.manageMultimorbidity : false;
+            vm.selfEfficacy.completeBehaviourGoals = null != vm.selfEfficacy.completeBehaviourGoals ? vm.selfEfficacy.completeBehaviourGoals : false;
             if (vm.selfEfficacy.id !== null) {
                 SelfEfficacy.update(vm.selfEfficacy, onSaveSuccess, onSaveError);
             } else {
