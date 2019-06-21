@@ -78,7 +78,14 @@ liquibase:
 #        keyAlias: mmsnap_web
 # ===================================================================
 server:
-    port: 8080
+    port: 443
+    ssl:
+        key-store: /etc/letsencrypt/live/www.mm-snap.com/pkcs.p12
+        key-store-password: 312ggp12
+        keyStoreType: PKCS12
+        keyAlias: mmsnap
+        ciphers: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384, TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_RSA_WITH_AES_256_GCM_SHA384, TLS_DHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_RSA_WITH_AES_128_CBC_SHA256, TLS_DHE_RSA_WITH_AES_256_CBC_SHA256
+        enabled-protocols: TLSv1.2
 
 # ===================================================================
 # JHipster specific properties
@@ -100,7 +107,7 @@ jhipster:
     security:
         authentication:
             jwt:
-                secret: my-secret-token-to-change-in-production
+                secret: ee5260505d3a111012e3cddd6e301905362566ca
                 # 86400: Token is valid 24 hours
                 token-validity-in-seconds: 10
                 token-validity-in-seconds-for-remember-me: 2592000
